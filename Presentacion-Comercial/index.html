@@ -141,12 +141,24 @@
     }
 
     @keyframes star-glow {
-      0%, 100% { filter: drop-shadow(0 0 4px var(--glow-color, rgba(235, 91, 39, 0.6))); transform: scale(1); opacity: 0.9; }
-      50% { filter: drop-shadow(0 0 12px var(--glow-color, rgba(235, 91, 39, 1))); transform: scale(1.15); opacity: 1; }
+      0%, 100% { filter: drop-shadow(0 0 4px var(--glow-color, rgba(235, 91, 39, 0.6))); opacity: 0.8; }
+      50% { filter: drop-shadow(0 0 12px var(--glow-color, rgba(235, 91, 39, 1))); opacity: 1; }
+    }
+
+    @keyframes star-scale-hover {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
     }
 
     .animate-star-glow {
-      animation: star-glow 2.5s ease-in-out infinite;
+      animation: star-glow 3.5s ease-in-out infinite;
+      display: inline-block;
+      transform-origin: center;
+      will-change: filter, transform;
+    }
+
+    .group:hover .animate-star-glow {
+      animation: star-glow 3.5s ease-in-out infinite, star-scale-hover 1.5s ease-in-out infinite;
     }
 
     .icon-glow-hover {
@@ -617,7 +629,7 @@
                 <!-- 1. El Paso, TX (Punto Rojo) - Recorrido más arriba -->
                 <div class="absolute top-[10%] left-[43.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandNaranjaClaro text-2xl animate-star-glow" style="--glow-color: rgba(254, 202, 102, 1)">star</span>
-                  <div class="bg-slate-900/95 text-brandNaranjaClaro text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranjaClaro/50 shadow-lg transition-transform group-hover:scale-105">
+                  <div class="bg-slate-900/95 text-brandNaranjaClaro text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranjaClaro/50 shadow-lg transition-transform group-hover:scale-115">
                     El Paso, TX (USA)
                   </div>
                 </div>
@@ -625,7 +637,7 @@
                 <!-- 2. Ciudad Juárez (Punto Verde) - Recorrido más arriba -->
                 <div class="absolute top-[21%] left-[42.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandCeleste text-2xl animate-star-glow" style="--glow-color: rgba(50, 132, 198, 1)">grade</span>
-                  <div class="bg-slate-900/95 text-brandCeleste text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandCeleste/50 shadow-lg transition-transform group-hover:scale-105">
+                  <div class="bg-slate-900/95 text-brandCeleste text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandCeleste/50 shadow-lg transition-transform group-hover:scale-115">
                     Cd. Juárez
                   </div>
                 </div>
@@ -633,7 +645,7 @@
                 <!-- 3. CDMX (Roma) (Punto Amarillo) - Se mantiene en su posición -->
                 <div class="absolute top-[76%] left-[54.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandNaranja text-2xl animate-star-glow" style="--glow-color: rgba(235, 91, 39, 1)">stars</span>
-                  <div class="bg-slate-900/95 text-brandNaranja text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranja/60 shadow-lg transition-transform group-hover:scale-105">
+                  <div class="bg-slate-900/95 text-brandNaranja text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranja/60 shadow-lg transition-transform group-hover:scale-115">
                     CDMX (Roma)
                   </div>
                 </div>
