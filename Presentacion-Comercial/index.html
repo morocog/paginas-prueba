@@ -967,153 +967,265 @@
         </div>
       </section>
 
-      <!-- DIAPOSITIVA 10: CASOS DE USO (MEJORA EYECATCH VISUAL DE UN GOLPE DE VISTA) -->
+      <!-- DIAPOSITIVA 10: CASOS DE USO (CON 6 CASOS REALES INTERACTIVOS Y AGNÓSTICOS) -->
       <section class="slide" data-slide="9" data-label="Casos de Uso">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-7xl items-center relative z-20">
-          <div class="col-span-3 flex flex-col justify-center">
+          <!-- Columna Izquierda: Selectores -->
+          <div class="col-span-4 flex flex-col justify-center">
             <div
               class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-3">
               <span class="material-symbols-outlined text-sm">cases</span> 09 — Casos de Uso
             </div>
-            <h2 class="font-momo text-3xl lg:text-4xl leading-tight mb-2 text-brandOscuro">
+            <h2 class="font-momo text-3xl lg:text-4xl leading-tight mb-4 text-brandOscuro">
               RESULTADOS EN <span
                 class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">LA
                 PRÁCTICA.</span>
             </h2>
             <p class="font-body text-[0.75rem] text-brandOscuro/80 leading-relaxed mb-4">
-              Casos reales donde identificamos ineficiencias críticas y las convertimos en rentabilidad bajo un esquema
-              técnico robusto.
+              Casos reales donde optimizamos operaciones complejas y las convertimos en rentabilidad y altos niveles de servicio.
             </p>
+
+            <!-- Lista de Botones de Pestañas -->
+            <div class="space-y-1.5" id="caseSelectorList">
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn active"
+                onclick="showCaseBlock('jail', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">contact_phone</span> 1. Autogestión y Mensajería (USA)
+                </span>
+              </button>
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn"
+                onclick="showCaseBlock('auto', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">assignment_turned_in</span> 2. E-Commerce y Cumplimiento
+                </span>
+              </button>
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn"
+                onclick="showCaseBlock('security', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">support_agent</span> 3. Soporte Técnico de Redes
+                </span>
+              </button>
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn"
+                onclick="showCaseBlock('gift', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">shopping_bag</span> 4. Demanda Estacional E-Commerce
+                </span>
+              </button>
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn"
+                onclick="showCaseBlock('custom', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">dashboard_customize</span> 5. Servicios Omnicanal Retail
+                </span>
+              </button>
+              <button
+                class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn"
+                onclick="showCaseBlock('glass', this)">
+                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm">local_shipping</span> 6. Despacho y Logística (USA)
+                </span>
+              </button>
+            </div>
           </div>
 
-          <div class="col-span-9 grid grid-cols-3 gap-5">
-            <!-- Caso 1: Telecomunicaciones -->
+          <!-- Columna Derecha: Contenido Cambiante del Caso -->
+          <div class="col-span-8 flex justify-center">
             <div
-              class="bg-white p-5 rounded-2xl border border-brandCeleste/25 shadow-lg flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
-              <div class="space-y-3">
-                <div class="flex justify-between items-center pb-2 border-b border-brandOscuro/10">
-                  <span class="text-xs font-extrabold text-brandCeleste uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-sm animate-icon-pulse">cell_tower</span> Telecom
-                  </span>
-                  <span class="bg-brandCeleste/10 text-brandCeleste text-[0.6rem] font-bold px-2 py-0.5 rounded-full uppercase">Caso Real</span>
+              class="w-full max-w-xl bg-white border border-brandOscuro/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col min-h-[380px]">
+              <div class="bg-brandOscuro/3 border-b border-brandOscuro/10 p-3 flex justify-between items-center">
+                <div class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2"
+                  id="case-header-title">
+                  <span class="material-symbols-outlined text-brandCeleste text-lg">description</span> DETALLES DEL PROYECTO
                 </div>
-
-                <!-- Sección Dolor -->
-                <div class="bg-red-50/90 text-red-800 p-3 rounded-xl border border-red-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-red-600 text-lg mt-0.5 shrink-0">report_problem</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-red-900 block mb-0.5">DESAFÍO INICIAL:</strong>
-                    12,000 llamadas saturadas, 18% abandono y tiempos de espera &gt;8 min.
-                  </div>
-                </div>
-
-                <!-- Sección Solución -->
-                <div class="bg-emerald-50/90 text-emerald-900 p-3 rounded-xl border border-emerald-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 shrink-0">verified</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-emerald-950 block mb-0.5">ESTRATEGIA TELAT:</strong>
-                    Enrutamiento IA predictivo + reasignación dinámica de supervisores.
-                  </div>
-                </div>
+                <span
+                  class="bg-brandNaranja/10 text-brandNaranja text-[0.65rem] font-bold px-2.5 py-0.5 rounded-full uppercase"
+                  id="case-header-badge">Telat BPO</span>
               </div>
 
-              <!-- Métricas Impacto -->
-              <div class="bg-brandClaro border border-brandOscuro/10 p-3 rounded-xl mt-3 flex justify-between items-center font-momo">
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">Abandono</div>
-                  <div class="text-sm text-brandNaranja font-bold">18% ➔ 6%</div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <!-- CONTENIDOS INDIVIDUALES DE CASOS -->
+                <!-- CASO 1: JAIL -->
+                <div class="case-content-block" id="case-jail">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Evolucionamos la infraestructura de soporte para una gran empresa de servicios de comunicación especializada en USA, reemplazando la atención tradicional telefónica por un canal interactivo autogestionado.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Tiempos de espera prolongados y saturación del canal telefónico para consultas y recargas básicas.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Integración de pantallas de autoservicio con chat interactivo en vivo, flujos rápidos de pago y validación de usuarios.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">T. Registro Usuario</div>
+                      <div class="text-base text-brandCeleste">14 min ➔ 3 min</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Tasa de Error</div>
+                      <div class="text-base text-brandNaranja">15% ➔ 1.2%</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="h-6 w-px bg-brandOscuro/10"></div>
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">Escalación</div>
-                  <div class="text-sm text-brandCeleste font-bold">2.1 min</div>
+
+                <!-- CASO 2: AUTO COMPRA-VENTA -->
+                <div class="case-content-block hidden" id="case-auto">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Soporte para una de las marcas más importantes de compra-venta de autos en EE.UU., encargándonos de validar la documentación legal y mitigar riesgos transaccionales.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Revisión manual y dispersa de documentación oficial de vehículos según legislaciones estatales, provocando demoras y riesgos normativos.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Validación estructurada de bases de datos, confirmación inmediata de fondos del comprador e integración ágil con normativas estatales.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Validación Legal</div>
+                      <div class="text-base text-brandCeleste">24 hrs ➔ 4 hrs</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Fallas Regulatorias</div>
+                      <div class="text-base text-brandNaranja">8.5% ➔ 0.4%</div>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- CASO 3: VIDEOVIGILANCIA -->
+                <div class="case-content-block hidden" id="case-security">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Atención de soporte técnico para el líder mundial en sistemas inteligentes de videovigilancia y monitoreo urbano.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Despacho genérico y costoso de técnicos a campo ante cualquier reporte, sin diagnósticos técnicos previos ni filtros de red.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Mesa de soporte Tier-1 unificada con herramientas de diagnóstico de red remotas y resolución de incidencias de servidores en vivo.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Resolución al 1er Contacto</div>
+                      <div class="text-base text-brandCeleste">62% ➔ 84%</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">MTTR (T. Resolución)</div>
+                      <div class="text-base text-brandNaranja">45m ➔ 12m</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CASO 4: REGALOS ESTACIONALES -->
+                <div class="case-content-block hidden" id="case-gift">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Gestión y optimización de ventas para una campaña masiva de obsequios y detalles corporativos en periodos críticos de demanda (Navidad y Año Nuevo).
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Procesamiento de pedidos reactivo e ineficiente, sin estrategias estructuradas para elevar el valor del ticket durante la interacción.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Flujos inteligentes de venta cruzada e integración en tiempo real del stock, maximizando el ticket promedio del cliente de manera orgánica.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Tasa de Venta Cruzada</div>
+                      <div class="text-base text-brandCeleste">8% ➔ 24%</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Ticket Promedio</div>
+                      <div class="text-base text-brandNaranja">$42 ➔ $68 USD</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CASO 5: PERSONALIZACIÓN OMNICANAL -->
+                <div class="case-content-block hidden" id="case-custom">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Atención y procesamiento de pedidos de configuración a la medida para un e-commerce norteamericano de artículos y productos personalizados.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Alta tasa de abandono en el carrito de compras debido a dudas de configuración del diseño y lentitud de los canales tradicionales.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Soporte unificado multicanal (Chat, SMS, Correo) con herramientas dinámicas de pre-visualización de diseño, resolviendo especificaciones al instante.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Abandono de Configuración</div>
+                      <div class="text-base text-brandCeleste">18% ➔ 3.2%</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Satisfacción (CSAT)</div>
+                      <div class="text-base text-brandNaranja">78% ➔ 93%</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CASO 6: VIDRIOS AUTOMOTRICES -->
+                <div class="case-content-block hidden" id="case-glass">
+                  <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                    Coordinación logística y despacho de servicios para el principal proveedor de reemplazo de cristales automotrices en Estados Unidos.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO TRADICIONAL ANTERIOR:</strong>
+                      Tiempos prolongados de espera para que el cliente supiera la disponibilidad de su cristal y pudiera agendar una cita de instalación.
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                      <strong class="font-bold block mb-1">PROCESO OPTIMIZADO:</strong>
+                      Búsqueda georreferenciada de inventario en tiempo real y agendamiento inmediato de técnicos móviles en la llamada inicial.
+                    </div>
+                  </div>
+                  <div
+                    class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Precisión de Geolocalización</div>
+                      <div class="text-base text-brandCeleste">88% ➔ 99.6%</div>
+                    </div>
+                    <div class="w-px bg-brandOscuro/10"></div>
+                    <div>
+                      <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Instalación en 24-48 horas</div>
+                      <div class="text-base text-brandNaranja">74% ➔ 96.8%</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
-
-            <!-- Caso 2: Servicios Financieros -->
-            <div
-              class="bg-white p-5 rounded-2xl border border-brandNaranja/25 shadow-lg flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
-              <div class="space-y-3">
-                <div class="flex justify-between items-center pb-2 border-b border-brandOscuro/10">
-                  <span class="text-xs font-extrabold text-brandNaranja uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-sm animate-icon-pulse">account_balance</span> Financiero
-                  </span>
-                  <span class="bg-brandNaranja/10 text-brandNaranja text-[0.6rem] font-bold px-2 py-0.5 rounded-full uppercase">Blindado</span>
-                </div>
-
-                <!-- Sección Dolor -->
-                <div class="bg-red-50/90 text-red-800 p-3 rounded-xl border border-red-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-red-600 text-lg mt-0.5 shrink-0">report_problem</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-red-900 block mb-0.5">DESAFÍO INICIAL:</strong>
-                    Firmas inconsistentes y vulnerabilidad latente en seguridad de datos.
-                  </div>
-                </div>
-
-                <!-- Sección Solución -->
-                <div class="bg-emerald-50/90 text-emerald-900 p-3 rounded-xl border border-emerald-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 shrink-0">verified</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-emerald-950 block mb-0.5">ESTRATEGIA TELAT:</strong>
-                    Identidad digital blindada y QA automático al 100% de llamadas.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Métricas Impacto -->
-              <div class="bg-brandClaro border border-brandOscuro/10 p-3 rounded-xl mt-3 flex justify-between items-center font-momo">
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">Apego Script</div>
-                  <div class="text-sm text-brandNaranja font-bold">100% Auditado</div>
-                </div>
-                <div class="h-6 w-px bg-brandOscuro/10"></div>
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">Incidencias TI</div>
-                  <div class="text-sm text-brandCeleste font-bold">0 Fallas</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Caso 3: Retail & E-commerce -->
-            <div
-              class="bg-white p-5 rounded-2xl border border-brandCeleste/25 shadow-lg flex flex-col justify-between hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
-              <div class="space-y-3">
-                <div class="flex justify-between items-center pb-2 border-b border-brandOscuro/10">
-                  <span class="text-xs font-extrabold text-brandCeleste uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-sm animate-icon-pulse">shopping_cart</span> Retail
-                  </span>
-                  <span class="bg-brandCeleste/10 text-brandCeleste text-[0.6rem] font-bold px-2 py-0.5 rounded-full uppercase">Escalado Ágil</span>
-                </div>
-
-                <!-- Sección Dolor -->
-                <div class="bg-red-50/90 text-red-800 p-3 rounded-xl border border-red-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-red-600 text-lg mt-0.5 shrink-0">report_problem</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-red-900 block mb-0.5">DESAFÍO INICIAL:</strong>
-                    Urgencia de escalar +270 posiciones en solo 18 días hábiles.
-                  </div>
-                </div>
-
-                <!-- Sección Solución -->
-                <div class="bg-emerald-50/90 text-emerald-900 p-3 rounded-xl border border-emerald-200/80 flex items-start gap-2.5">
-                  <span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 shrink-0">verified</span>
-                  <div class="text-xs leading-snug font-body">
-                    <strong class="font-bold text-emerald-950 block mb-0.5">ESTRATEGIA TELAT:</strong>
-                    Nesting acelerado con IA + 47% de automatización de tickets.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Métricas Impacto -->
-              <div class="bg-brandClaro border border-brandOscuro/10 p-3 rounded-xl mt-3 flex justify-between items-center font-momo">
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">Ramp-up</div>
-                  <div class="text-sm text-brandNaranja font-bold">18 Días</div>
-                </div>
-                <div class="h-6 w-px bg-brandOscuro/10"></div>
-                <div>
-                  <div class="text-[0.6rem] text-brandOscuro/60 uppercase font-semibold font-body">NPS Retenido</div>
+          </div>
+        </div>do</div>
                   <div class="text-sm text-brandCeleste font-bold">82 Pts</div>
                 </div>
               </div>
@@ -1287,44 +1399,84 @@
         </div>
       </section>
 
-      <!-- DIAPOSITIVA 13: CASOS DE ÉXITO -->
+      <!-- DIAPOSITIVA 13: CASOS DE ÉXITO (3 TESTIMONIALES REALES) -->
       <section class="slide" data-slide="12" data-label="Casos de Éxito">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
-          <div class="col-span-5 flex flex-col justify-center">
+        <div class="w-full max-w-7xl flex flex-col justify-center h-full relative z-20">
+          <div class="text-left mb-6">
             <div
-              class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+              class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-1">
               <span class="material-symbols-outlined text-sm">thumb_up</span> 12 — Casos de Éxito
             </div>
-            <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
-              SOPORTE CRÍTICO <span class="text-brandCeleste">COMPROBADO</span>
+            <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro">
+              SOPORTE Y EFICIENCIA <span class="text-brandCeleste">COMPROBADA</span>
             </h2>
-            <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
-              Nuestras metodologías de servicio resuelven de forma contundente los desafíos operacionales en marcas de
-              alta demanda.
+            <p class="font-body text-xs text-brandOscuro/80 max-w-2xl leading-relaxed mt-2">
+              Resultados de servicio validados en operaciones activas donde nuestras metodologías resolvieron ineficiencias críticas de negocio.
             </p>
           </div>
 
-          <div class="col-span-7 space-y-4">
-            <div class="bg-white p-5 rounded-xl border border-brandOscuro/5 shadow-md">
-              <span class="text-[0.65rem] font-bold text-brandCeleste uppercase tracking-wider block mb-1">Retail
-                Omnicanal</span>
-              <p class="font-body text-xs italic text-brandOscuro/80 leading-relaxed mb-3">
-                "Logramos escalar la capacidad instalada de 80 a 350 posiciones en 18 días hábiles, manteniendo el NPS
-                en 82 y automatizando el 47% de las interacciones."
-              </p>
-              <div class="border-t border-brandOscuro/5 pt-2 text-[0.7rem] font-subheadings text-brandOscuro/60">
-                Reducción de costo por contacto: -31%
+          <!-- Grid de 3 Testimoniales -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Testimonial 1: Telecomunicaciones / Autogestión -->
+            <div class="bg-white p-5 rounded-2xl border border-brandOscuro/5 shadow-lg flex flex-col justify-between group hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+              <div class="space-y-2">
+                <span class="text-[0.65rem] font-bold text-brandCeleste uppercase tracking-wider block">Autogestión de Canales</span>
+                <p class="font-body text-xs italic text-brandOscuro/80 leading-relaxed">
+                  "Rediseñamos el proceso de registro y activación de cuentas, eliminando esperas telefónicas mediante una plataforma de autogestión de datos en tablets."
+                </p>
+              </div>
+              <div class="border-t border-brandOscuro/5 pt-3 mt-4 flex justify-between items-center font-momo">
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">T. Registro</div>
+                  <div class="text-sm text-brandCeleste">14 min ➔ 3 min</div>
+                </div>
+                <div class="h-6 w-px bg-brandOscuro/10"></div>
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">Tasa de Error</div>
+                  <div class="text-sm text-brandNaranja">15% ➔ 1.2%</div>
+                </div>
               </div>
             </div>
-            <div class="bg-white p-5 rounded-xl border border-brandNaranja/15 shadow-md">
-              <span
-                class="text-[0.65rem] font-bold text-brandNaranja uppercase tracking-wider block mb-1">Telecomunicaciones</span>
-              <p class="font-body text-xs italic text-brandOscuro/80 leading-relaxed mb-3">
-                "La implementación de la consola de enrutamiento redujo la tasa de llamadas abandonadas del 18% al 6%,
-                logrando resolver escalaciones en 2.1 minutos."
-              </p>
-              <div class="border-t border-brandOscuro/5 pt-2 text-[0.7rem] font-subheadings text-brandOscuro/60">
-                Incremento en First Contact Resolution: +22 p.p.
+
+            <!-- Testimonial 2: Soporte Técnico Tier-1 -->
+            <div class="bg-white p-5 rounded-2xl border border-brandNaranja/15 shadow-lg flex flex-col justify-between group hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+              <div class="space-y-2">
+                <span class="text-[0.65rem] font-bold text-brandNaranja uppercase tracking-wider block">Soporte Técnico de Redes</span>
+                <p class="font-body text-xs italic text-brandOscuro/80 leading-relaxed">
+                  "Establecimos una mesa de soporte Tier-1 especializada con herramientas de diagnóstico de red remoto, optimizando la resolución en primer contacto."
+                </p>
+              </div>
+              <div class="border-t border-brandOscuro/5 pt-3 mt-4 flex justify-between items-center font-momo">
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">FCR (1er Contacto)</div>
+                  <div class="text-sm text-brandCeleste">62% ➔ 84%</div>
+                </div>
+                <div class="h-6 w-px bg-brandOscuro/10"></div>
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">MTTR (Resolución)</div>
+                  <div class="text-sm text-brandNaranja">45m ➔ 12m</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3: Retail Omnicanal -->
+            <div class="bg-white p-5 rounded-2xl border border-brandOscuro/5 shadow-lg flex flex-col justify-between group hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+              <div class="space-y-2">
+                <span class="text-[0.65rem] font-bold text-brandCeleste uppercase tracking-wider block">Retail y E-Commerce Especializado</span>
+                <p class="font-body text-xs italic text-brandOscuro/80 leading-relaxed">
+                  "Integramos canales de soporte omnicanal (Chat, SMS, Correo) con herramientas de validación de diseño en vivo para compras personalizadas."
+                </p>
+              </div>
+              <div class="border-t border-brandOscuro/5 pt-3 mt-4 flex justify-between items-center font-momo">
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">Abandono Carrito</div>
+                  <div class="text-sm text-brandCeleste">18% ➔ 3.2%</div>
+                </div>
+                <div class="h-6 w-px bg-brandOscuro/10"></div>
+                <div>
+                  <div class="text-[0.55rem] font-body text-brandOscuro/50 uppercase font-semibold">CSAT (Satisfacción)</div>
+                  <div class="text-sm text-brandNaranja">78% ➔ 93%</div>
+                </div>
               </div>
             </div>
           </div>
@@ -1859,6 +2011,43 @@
       if (targetBlock) targetBlock.classList.remove('hidden');
     }
 
+    // Selector Interactivo de Casos de Éxito (Slide 10)
+    function showCaseBlock(caseId, btnElement) {
+      // Ocultar todos los bloques de contenido
+      document.querySelectorAll('.case-content-block').forEach(block => {
+        block.classList.add('hidden');
+      });
+      // Mostrar bloque seleccionado
+      const targetBlock = document.getElementById(`case-${caseId}`);
+      if (targetBlock) targetBlock.classList.remove('hidden');
+
+      // Actualizar clases activas en los selectores
+      document.querySelectorAll('.case-selector-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-brandCeleste/10', 'text-brandCeleste', 'border-l-4', 'border-brandCeleste');
+        btn.classList.add('bg-white', 'text-brandOscuro');
+      });
+      btnElement.classList.add('active', 'bg-brandCeleste/10', 'text-brandCeleste', 'border-l-4', 'border-brandCeleste');
+      btnElement.classList.remove('bg-white', 'text-brandOscuro');
+
+      // Actualizar cabecera del card
+      const headerTitle = document.getElementById('case-header-title');
+      const headerBadge = document.getElementById('case-header-badge');
+      
+      const caseLabels = {
+        jail: { title: 'CANAL DE AUTOGESTIÓN Y MENSAJERÍA', badge: 'Telefonía Especializada' },
+        auto: { title: 'PLATAFORMA TRANSACCIONAL FINANCIERA', badge: 'Cumplimiento Legal' },
+        security: { title: 'SOPORTE TÉCNICO E INFRAESTRUCTURA', badge: 'Soporte Tier 1' },
+        gift: { title: 'OPERACIONES DE DEMANDA ESTACIONAL', badge: 'Venta Cruzada' },
+        custom: { title: 'RETAIL Y SERVICIOS OMNICANAL', badge: 'Omnicanalidad' },
+        glass: { title: 'SOPORTE LOGÍSTICO Y DESPACHO EN CAMPO', badge: 'Cumplimiento SLA' }
+      };
+
+      if (caseLabels[caseId] && headerTitle && headerBadge) {
+        headerTitle.innerHTML = `<span class="material-symbols-outlined text-brandCeleste text-lg">description</span> ${caseLabels[caseId].title}`;
+        headerBadge.innerText = caseLabels[caseId].badge;
+      }
+    }
+
     // Envío de Formulario
     function handleFormSubmit(event) {
       event.preventDefault();
@@ -1876,6 +2065,8 @@
       updateBudgetDropdown();
       const firstIABtn = document.querySelector('.pain-selector-btn');
       if (firstIABtn) showDashboardBlock('productivity', firstIABtn);
+      const firstCaseBtn = document.querySelector('.case-selector-btn');
+      if (firstCaseBtn) showCaseBlock('jail', firstCaseBtn);
     });
   </script>
 </body>
