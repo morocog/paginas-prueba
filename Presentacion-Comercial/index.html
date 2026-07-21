@@ -161,6 +161,16 @@
       animation: star-glow 3.5s ease-in-out infinite, star-scale-hover 1.5s ease-in-out infinite;
     }
 
+    .map-label {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: left center;
+      will-change: transform;
+    }
+
+    .group:hover .map-label {
+      transform: scale(1.4) !important;
+    }
+
     .icon-glow-hover {
       transition: transform 0.3s ease, filter 0.3s ease;
     }
@@ -629,7 +639,7 @@
                 <!-- 1. El Paso, TX (Punto Rojo) - Recorrido más arriba -->
                 <div class="absolute top-[10%] left-[43.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandNaranjaClaro text-2xl animate-star-glow" style="--glow-color: rgba(254, 202, 102, 1)">star</span>
-                  <div class="bg-slate-900/95 text-brandNaranjaClaro text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranjaClaro/50 shadow-lg transition-transform group-hover:scale-115">
+                  <div class="bg-slate-900/95 text-brandNaranjaClaro text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranjaClaro/50 shadow-lg map-label">
                     El Paso, TX (USA)
                   </div>
                 </div>
@@ -637,7 +647,7 @@
                 <!-- 2. Ciudad Juárez (Punto Verde) - Recorrido más arriba -->
                 <div class="absolute top-[21%] left-[42.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandCeleste text-2xl animate-star-glow" style="--glow-color: rgba(50, 132, 198, 1)">grade</span>
-                  <div class="bg-slate-900/95 text-brandCeleste text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandCeleste/50 shadow-lg transition-transform group-hover:scale-115">
+                  <div class="bg-slate-900/95 text-brandCeleste text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandCeleste/50 shadow-lg map-label">
                     Cd. Juárez
                   </div>
                 </div>
@@ -645,7 +655,7 @@
                 <!-- 3. CDMX (Roma) (Punto Amarillo) - Se mantiene en su posición -->
                 <div class="absolute top-[76%] left-[54.5%] flex items-center gap-1.5 group cursor-pointer z-10">
                   <span class="inline-block material-symbols-outlined text-brandNaranja text-2xl animate-star-glow" style="--glow-color: rgba(235, 91, 39, 1)">stars</span>
-                  <div class="bg-slate-900/95 text-brandNaranja text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranja/60 shadow-lg transition-transform group-hover:scale-115">
+                  <div class="bg-slate-900/95 text-brandNaranja text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranja/60 shadow-lg map-label">
                     CDMX (Roma)
                   </div>
                 </div>
@@ -1587,11 +1597,17 @@
                 su necesidad actual:</p>
 
               <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-3">
-                <div>
-                  <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Nombre de
-                    la Empresa</label>
-                  <input type="text" required placeholder="Escriba el nombre comercial"
-                    class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Nombre Completo</label>
+                    <input type="text" required placeholder="Tu nombre y apellido"
+                      class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                  </div>
+                  <div>
+                    <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Nombre de la Empresa</label>
+                    <input type="text" required placeholder="Escriba el nombre comercial"
+                      class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                  </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                   <div>
