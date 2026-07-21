@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group - Digitalización de Procesos e Inteligencia Artificial</title>
+    
+    <!-- Google Fonts oficiales (DM Sans, Montserrat & Playfair Display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols para iconografía de tecnología limpia -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- Tailwind CSS para diseño y maquetación fluida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandNaranjaClaro: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                    },
+                    fontFamily: {
+                        headings: ['Playfair Display', 'serif'],
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                        momo: ['Impact', 'Arial Black', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-naranja-claro: #FECA66;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+            --grad-vibrante: linear-gradient(90deg, var(--brand-celeste) 0%, var(--brand-naranja) 100%);
+        }
+
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Contenedor de Diapositivas SPA */
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #FBFBFD 0%, #EBF2F7 100%);
+        }
+
+        .slides-wrapper {
+            position: relative;
+            flex-grow: 1;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 4rem;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        /* Resplandores y Cuadrícula Sutil */
+        .glow-frame-celeste { box-shadow: 0 15px 45px rgba(50, 132, 198, 0.12); border: 1px solid rgba(50, 132, 198, 0.2); }
+        .glow-frame-naranja { box-shadow: 0 15px 45px rgba(235, 91, 39, 0.12); border: 1px solid rgba(235, 91, 39, 0.2); }
+        
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes rotate-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .animate-rotate-slow { animation: rotate-slow 30s linear infinite; }
+
+        @keyframes star-glow {
+            0%, 100% { filter: drop-shadow(0 0 4px var(--glow-color, rgba(235, 91, 39, 0.6))); transform: scale(1); opacity: 0.9; }
+            50% { filter: drop-shadow(0 0 12px var(--glow-color, rgba(235, 91, 39, 1))); transform: scale(1.15); opacity: 1; }
+        }
+        .animate-star-glow { animation: star-glow 2.5s ease-in-out infinite; }
+
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        .animate-icon-pulse { animation: icon-pulse 3s ease-in-out infinite; }
+
+        .icon-glow-hover { transition: transform 0.3s ease, filter 0.3s ease; }
+        .icon-glow-hover:hover {
+            transform: scale(1.15) rotate(4deg);
+            filter: drop-shadow(0 4px 12px rgba(50, 132, 198, 0.4));
+        }
+
+        /* Barra superior de progreso de 6px */
+        #top-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6px;
+            background: var(--grad-vibrante);
+            width: 0%;
+            transition: width 0.4s ease;
+            z-index: 100;
+        }
+
+        .material-symbols-outlined {
+            font-variant-numeric: tabular-nums;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brandNaranjaClaro selection:text-brandOscuro">
+
+    <!-- Barra superior de progreso fija (6px) -->
+    <div id="top-progress-bar"></div>
+
+    <!-- Elementos Flotantes de la Cabecera -->
+    <div class="fixed top-4 left-8 z-40 flex items-center gap-3">
+        <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-9 object-contain filter drop-shadow-sm">
+        <span class="text-gray-300 text-xl font-light">|</span>
+        <div class="bg-brandNaranja/8 border border-brandNaranja/20 text-brandNaranja text-[0.65rem] font-subheadings px-3 py-1 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs animate-icon-pulse">rocket_launch</span> Digitalización
+        </div>
+    </div>
+
+    <div class="fixed top-4 right-8 z-40">
+        <button onclick="toggleMenu()" class="w-10 h-10 bg-white/90 hover:bg-white text-brandOscuro rounded-full flex items-center justify-center transition-all shadow-lg border border-brandOscuro/10 focus:outline-none" aria-label="Abrir Menú">
+            <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+    </div>
+
+    <div class="presentation-container tech-grid-bg">
+
+        <!-- MENÚ DE HAMBURGUESA / JUMP DRAWER -->
+        <div id="executiveDrawer" class="fixed inset-y-0 right-0 w-80 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l border-brandOscuro/10 flex flex-col justify-between">
+            <div class="p-6 overflow-y-auto">
+                <div class="flex justify-between items-center pb-4 mb-4 border-b border-brandOscuro/10">
+                    <h3 class="font-subheadings font-bold text-sm text-brandOscuro uppercase tracking-wider">Menú de Navegación</h3>
+                    <button onclick="toggleMenu()" class="w-8 h-8 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all">
+                        <span class="material-symbols-outlined text-xl">close</span>
+                    </button>
+                </div>
+                <nav class="space-y-1" id="drawerList">
+                    <!-- Autogenerado con JavaScript -->
+                </nav>
+            </div>
+            <div class="p-6 border-t border-brandOscuro/5 bg-brandClaro">
+                <div class="text-xs font-body text-brandOscuro/50">Telat Group &copy; 2026. Todos los derechos reservados.</div>
+            </div>
+        </div>
+        <div id="drawerOverlay" onclick="toggleMenu()" class="fixed inset-0 bg-brandOscuro/20 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+        <!-- CONTENEDOR DE DIAPOSITIVAS -->
+        <main class="slides-wrapper" id="slidesWrapper">
+            
+            <!-- DIAPOSITIVA 1: HERO (Digitalización) -->
+            <section class="slide active" data-slide="0" data-label="Inicio">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-7 flex flex-col justify-center text-left">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-sm">precision_manufacturing</span> Digitalización BPO e IA
+                        </div>
+                        <h1 class="font-momo text-5xl lg:text-6xl leading-[0.95] mb-6 text-brandOscuro">
+                            TUS PROCESOS NO DEBEN SER LENTOS.<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">
+                                DEBEN SER DIGITALES.
+                            </span>
+                        </h1>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6 max-w-xl">
+                            Telat transforma cada flujo manual y analógico en un activo de eficiencia automatizado. Eliminamos cuellos de botella de datos mediante inteligencia operativa y blindaje de procesos.
+                        </p>
+                        <div class="flex gap-4 mb-8">
+                            <button class="bg-brandNaranja text-white font-subheadings font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-brandNaranja/90 transition-all flex items-center gap-2 text-sm" onclick="nextSlide()">
+                                Iniciar Auditoría de Procesos <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4 border-t border-brandOscuro/10 pt-4">
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandNaranja">-65%</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Costo Operativo</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandCeleste">-80%</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Tiempo Ciclo</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandNaranja">99.6%</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Precisión Datos</p>
+                            </div>
+                            <div>
+                                <h4 class="font-momo text-2xl text-brandCeleste">24/7</h4>
+                                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Disponibilidad</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-span-5 flex justify-center items-center">
+                        <div class="relative w-[440px] h-[440px] flex justify-center items-center">
+                            <!-- Círculos punteados animados -->
+                            <div class="absolute w-full h-full border-2 border-dashed border-brandNaranja/60 rounded-full animate-rotate-slow"></div>
+                            <div class="absolute w-[82%] h-[82%] border-2 border-dashed border-brandCeleste/60 rounded-full animate-rotate-slow" style="animation-direction: reverse;"></div>
+                            <div class="absolute w-[64%] h-[64%] border border-dashed border-brandNaranjaClaro/80 rounded-full animate-rotate-slow" style="animation-duration: 20s;"></div>
+
+                            <!-- Logo Central Flotante -->
+                            <div class="w-64 h-64 flex items-center justify-center animate-float z-10 p-2">
+                                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="w-full h-auto object-contain filter drop-shadow-lg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 2: EL PROBLEMA (Procesos Analógicos) -->
+            <section class="slide" data-slide="1" data-label="El Problema">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-7 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-sm">warning</span> 01 — El Desafío
+                        </div>
+                        <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
+                            EL CUELLO DE BOTELLA <span class="text-brandNaranja">DEL BPO ANALÓGICO</span>
+                        </h2>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
+                            Las empresas líderes siguen operando con procesos híbridos o manuales ineficientes: validación de documentos en papel, ingreso de datos propicio a errores, tiempos muertos en atención telefónica y falta de integraciones tecnológicas que limitan el crecimiento comercial.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex gap-4 p-4 bg-brandNaranja/4 border-l-4 border-brandNaranja rounded-r-lg hover:bg-brandNaranja/8 transition-all duration-300">
+                                <span class="material-symbols-outlined text-brandNaranja text-2xl shrink-0">drafts</span>
+                                <div>
+                                    <h5 class="font-subheadings font-bold text-sm text-brandOscuro">Procesos de Entrada Lentos</h5>
+                                    <p class="font-body text-xs text-brandOscuro/70">Escaneo ineficiente de documentos y re-captura manual de información.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 bg-brandNaranja/4 border-l-4 border-brandNaranja rounded-r-lg hover:bg-brandNaranja/8 transition-all duration-300">
+                                <span class="material-symbols-outlined text-brandNaranja text-2xl shrink-0">lock_open</span>
+                                <div>
+                                    <h5 class="font-subheadings font-bold text-sm text-brandOscuro">Riesgo en Seguridad y Cumplimiento</h5>
+                                    <p class="font-body text-xs text-brandOscuro/70">Falta de trazabilidad e inconsistencias que ponen en riesgo la seguridad financiera.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-span-5 flex justify-center">
+                        <div class="bg-white p-8 rounded-3xl border border-brandNaranja/25 glow-frame-naranja text-center max-w-sm">
+                            <span class="material-symbols-outlined text-brandNaranja text-4xl mb-2">warning</span>
+                            <div class="font-subheadings text-[0.75rem] text-brandOscuro/60 uppercase tracking-wider mb-2 font-bold">Fugas Silenciosas</div>
+                            <div class="font-momo text-6xl text-brandNaranja mb-4">47%</div>
+                            <p class="font-body text-xs text-brandOscuro/70 pt-4 border-t border-brandOscuro/10">
+                                de los procesos transaccionales y de soporte al cliente siguen operando sin automatización básica, encareciendo la facturación operativa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 3: LA SOLUCIÓN (Ecosistema Digitalización) -->
+            <section class="slide" data-slide="2" data-label="Nuestra Solución">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-6 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-sm">settings_suggest</span> 02 — La Solución
+                        </div>
+                        <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
+                            DIGITALIZACIÓN DE PROCESOS <span class="text-brandCeleste">DE EXTREMO A EXTREMO</span>
+                        </h2>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
+                            Telat Group no solo atiende canales. Mapeamos, reestructuramos e implementamos tecnología para eliminar el papel y virtualizar flujos complejos de back-office.
+                        </p>
+                    </div>
+                    
+                    <div class="col-span-6 grid grid-cols-2 gap-5">
+                        <div class="bg-white p-6 rounded-2xl border border-brandCeleste/25 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-brandCeleste/10 flex items-center justify-center mb-3 text-brandCeleste group-hover:bg-brandCeleste group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined text-3xl animate-icon-pulse">scanner</span>
+                            </div>
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro mb-1.5 group-hover:text-brandCeleste transition-colors">Conversión de Entradas</h4>
+                            <p class="font-body text-xs text-brandOscuro/80 leading-relaxed">Escaneo y digitalización de datos estructurados para su procesamiento inmediato en la nube.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-brandNaranja/25 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-brandNaranja/10 flex items-center justify-center mb-3 text-brandNaranja group-hover:bg-brandNaranja group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined text-3xl animate-icon-pulse">rule_folder</span>
+                            </div>
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro mb-1.5 group-hover:text-brandNaranja transition-colors">Validación de Negocio</h4>
+                            <p class="font-body text-xs text-brandOscuro/80 leading-relaxed">Regulaciones automatizadas para verificar títulos, contratos y capacidad financiera sin riesgo.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-brandCeleste/25 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-brandCeleste/10 flex items-center justify-center mb-3 text-brandCeleste group-hover:bg-brandCeleste group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined text-3xl animate-icon-pulse">hub</span>
+                            </div>
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro mb-1.5 group-hover:text-brandCeleste transition-colors">Agendamiento y Ruteo</h4>
+                            <p class="font-body text-xs text-brandOscuro/80 leading-relaxed">Geolocalización automatizada para despachar técnicos y piezas al lugar exacto en tiempo récord.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-brandNaranja/25 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-brandNaranja/10 flex items-center justify-center mb-3 text-brandNaranja group-hover:bg-brandNaranja group-hover:text-white transition-all duration-300">
+                                <span class="material-symbols-outlined text-3xl animate-icon-pulse">ads_click</span>
+                            </div>
+                            <h4 class="font-subheadings font-bold text-base text-brandOscuro mb-1.5 group-hover:text-brandNaranja transition-colors">Omnicanalidad Unificada</h4>
+                            <p class="font-body text-xs text-brandOscuro/80 leading-relaxed">Integración total de Chat, SMS, Email y Telefonía bajo un flujo único e inteligente de datos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 4: 6 CASOS DE ÉXITO INTERACTIVOS -->
+            <section class="slide" data-slide="3" data-label="Casos de Éxito">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-7xl items-center relative z-20">
+                    <!-- Columna Izquierda: Selectores -->
+                    <div class="col-span-4 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-3">
+                            <span class="material-symbols-outlined text-sm">cases</span> 03 — Casos Reales
+                        </div>
+                        <h2 class="font-momo text-3xl lg:text-4xl leading-tight mb-4 text-brandOscuro">
+                            NUESTROS LOGROS EN <span class="text-brandCeleste">DIGITALIZACIÓN</span>
+                        </h2>
+                        
+                        <!-- Lista de Botones de Pestañas -->
+                        <div class="space-y-1.5">
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn active" onclick="showCaseBlock('jail', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">contact_phone</span> 1. Telecom. Carcelaria (USA)
+                                </span>
+                            </button>
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn" onclick="showCaseBlock('auto', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">directions_car</span> 2. E-Commerce Autos (USA)
+                                </span>
+                            </button>
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn" onclick="showCaseBlock('security', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">videocam</span> 3. Videovigilancia Inteligente
+                                </span>
+                            </button>
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn" onclick="showCaseBlock('gift', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">shopping_bag</span> 4. Pedidos y Ventas Estacionales
+                                </span>
+                            </button>
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn" onclick="showCaseBlock('custom', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">palette</span> 5. Personalización Omnicanal
+                                </span>
+                            </button>
+                            <button class="w-full text-left p-2.5 rounded-lg border border-brandOscuro/10 bg-white hover:bg-brandCeleste/5 hover:border-brandCeleste transition-all flex justify-between items-center case-selector-btn" onclick="showCaseBlock('glass', this)">
+                                <span class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">build</span> 6. Vidrios Automotrices (USA)
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna Derecha: Contenido Cambiante del Caso -->
+                    <div class="col-span-8 flex justify-center">
+                        <div class="w-full max-w-xl bg-white border border-brandOscuro/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col min-h-[380px]">
+                            <div class="bg-brandOscuro/3 border-b border-brandOscuro/10 p-3 flex justify-between items-center">
+                                <div class="font-subheadings text-xs font-bold text-brandOscuro flex items-center gap-2" id="case-header-title">
+                                    <span class="material-symbols-outlined text-brandCeleste text-lg">description</span> DETALLES DEL PROYECTO
+                                </div>
+                                <span class="bg-brandNaranja/10 text-brandNaranja text-[0.65rem] font-bold px-2.5 py-0.5 rounded-full uppercase" id="case-header-badge">Telat BPO</span>
+                            </div>
+                            
+                            <div class="p-6 flex-grow flex flex-col justify-between">
+                                
+                                <!-- CONTENIDOS INDIVIDUALES DE CASOS -->
+                                <!-- CASO 1: JAIL -->
+                                <div class="case-content-block" id="case-jail">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Evolucionamos la infraestructura para la mayor empresa de telecomunicaciones penitenciarias en USA, pasando de llamadas manuales de cobro a un ecosistema integral digital en tablets.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Internos esperaban en filas; llamadas exclusivas de voz para consulta de saldo y creación de cuenta de pago.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Tabletas internas con mensajería, videovisitas, ruteo digital de quejas y escaneo de contenido regulado.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">T. Registro Usuario</div>
+                                            <div class="text-base text-brandCeleste">14 min ➔ 3 min</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Error de Activación</div>
+                                            <div class="text-base text-brandNaranja">15% ➔ 1.2%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CASO 2: AUTO COMPRA-VENTA -->
+                                <div class="case-content-block hidden" id="case-auto">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Soporte para líder estadounidense de compra-venta de autos, encargándonos de validar toda la documentación legal y previniendo fraudes transaccionales de alto valor.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Revisión manual lenta de títulos de propiedad físicos de cada estado, generando demoras de entrega y riesgos legales.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Validación digital inmediata de propiedad, verificación del fondo financiero del comprador y apego automatizado a normativas estatales.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Verificación de Título</div>
+                                            <div class="text-base text-brandCeleste">24 hrs ➔ 4 hrs</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Fallas Regulatorias</div>
+                                            <div class="text-base text-brandNaranja">8.5% ➔ 0.4%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CASO 3: VIDEOVIGILANCIA -->
+                                <div class="case-content-block hidden" id="case-security">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Atención a la marca líder de videovigilancia urbana de alta tecnología, encargada de la detección de placas y reconocimiento biométrico en tiempo real.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Escalamiento genérico de fallas de cámaras a ingenieros costosos de campo sin diagnóstico estructurado.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Soporte Tier-1 unificado con software de diagnóstico de red remota, resolviendo incidencias en servidores de forma instantánea.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Resolución al 1er Contacto</div>
+                                            <div class="text-base text-brandCeleste">62% ➔ 84%</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Tiempo Medio de Respuesta (MTTR)</div>
+                                            <div class="text-base text-brandNaranja">45m ➔ 12m</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CASO 4: REGALOS ESTACIONALES -->
+                                <div class="case-content-block hidden" id="case-gift">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Gestión y optimización de ventas para campaña masiva de canastas de regalos en picos de demanda crítica (Navidad, Acción de Gracias y Año Nuevo).
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Toma simple de pedidos tradicionales. Llamadas largas y nula venta sugestiva de productos adicionales.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Carga de flujos inteligentes de upselling integrados al sistema de pedidos, sugiriendo paquetes amplios al momento de capturar el ticket.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Tasa de Venta Sugerida</div>
+                                            <div class="text-base text-brandCeleste">8% ➔ 24%</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Valor Promedio de Compra</div>
+                                            <div class="text-base text-brandNaranja">$42 ➔ $68 USD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CASO 5: PERSONALIZACIÓN OMNICANAL -->
+                                <div class="case-content-block hidden" id="case-custom">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Atención y procesamiento de pedidos a medida para e-commerce estadounidense de mercancía personalizada (tazas, playeras, mantas, tarjetas de regalo).
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Errores constantes en la personalización y canales separados de soporte que demoraban la producción del pedido.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Ecosistema unificado de multicanalidad (Chat, SMS, Email) con verificador de especificaciones de diseño automatizado y entrega ágil.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Abandono de Configuración</div>
+                                            <div class="text-base text-brandCeleste">18% ➔ 3.2%</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Satisfacción de Cliente (CSAT)</div>
+                                            <div class="text-base text-brandNaranja">78% ➔ 93%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CASO 6: VIDRIOS AUTOMOTRICES -->
+                                <div class="case-content-block hidden" id="case-glass">
+                                    <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-4">
+                                        Gestión integral de reemplazo de vidrios y parabrisas para el mayor proveedor en EE.UU. Optimizamos el despacho logístico de técnicos de principio a fin.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-red-50 text-red-800 p-3 rounded-lg border border-red-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO MANUAL ANTERIOR:</strong>
+                                            Búsqueda manual de piezas compatibles e imposibilidad de agendar visitas de técnicos en la llamada inicial.
+                                        </div>
+                                        <div class="bg-emerald-50 text-emerald-900 p-3 rounded-lg border border-emerald-200 text-xs">
+                                            <strong class="font-bold block mb-1">PROCESO DIGITALIZADO:</strong>
+                                            Perfilado del vehículo, verificación de compatibilidad de vidrio en base de datos, geolocalización de inventario y cita con técnico en una llamada.
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-around bg-brandClaro p-3 rounded-xl border border-brandOscuro/5 font-momo text-center">
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Precisión de Geolocalización</div>
+                                            <div class="text-base text-brandCeleste">88% ➔ 99.6%</div>
+                                        </div>
+                                        <div class="w-px bg-brandOscuro/10"></div>
+                                        <div>
+                                            <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Instalación en 24-48 horas</div>
+                                            <div class="text-base text-brandNaranja">74% ➔ 96.8%</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 5: CASO 7 (IA OPERATIVA - 200 A 12 AGENTES) -->
+            <section class="slide" data-slide="4" data-label="IA y Personas">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-6 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-sm">cognition</span> 04 — Transformación con IA
+                        </div>
+                        <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
+                            EL CASO DE ÉXITO DE <span class="text-brandNaranja">VIRTUALIZACIÓN IA</span>
+                        </h2>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
+                            Demostramos la eficiencia de nuestro ecosistema híbrido (Humano + Inteligencia Artificial). Automatizamos flujos transaccionales y de consulta masiva que antes saturaban a todo un equipo de piso, liberando espacio para que el equipo humano resuelva gestiones de alto valor.
+                        </p>
+                    </div>
+                    
+                    <div class="col-span-6 flex justify-center">
+                        <div class="bg-white p-7 rounded-3xl border border-brandNaranja/25 shadow-2xl w-full max-w-md">
+                            <div class="flex items-center gap-2 text-brandOscuro mb-4">
+                                <span class="material-symbols-outlined text-brandNaranja text-3xl">reduce_capacity</span>
+                                <h4 class="font-subheadings font-bold text-base">Rediseño de Capacidad Instalada</h4>
+                            </div>
+                            
+                            <div class="space-y-4 mb-5 border-b border-brandOscuro/10 pb-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs font-body text-brandOscuro/60 uppercase font-semibold">Operación Tradicional</div>
+                                    <div class="font-momo text-xl text-brandOscuro">+200 Agentes</div>
+                                </div>
+                                <div class="flex justify-between items-center bg-brandNaranja/5 p-3 rounded-lg border border-brandNaranja/10">
+                                    <div class="text-xs font-body font-bold text-brandNaranja uppercase">Operación Digital Telat</div>
+                                    <div class="font-momo text-2xl text-brandNaranja">12 Agentes + IA</div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-3 text-center">
+                                <div class="bg-brandClaro p-3 rounded-xl border border-brandOscuro/5">
+                                    <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Ahorro en Personal</div>
+                                    <div class="font-momo text-2xl text-brandCeleste">-65%</div>
+                                </div>
+                                <div class="bg-brandClaro p-3 rounded-xl border border-brandOscuro/5">
+                                    <div class="text-[0.6rem] font-body text-brandOscuro/60 uppercase font-semibold">Servicio Cobertura</div>
+                                    <div class="font-momo text-2xl text-brandNaranja">24/7</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 6: QUIÊN ES TELAT & MAPA DE HUBS -->
+            <section class="slide" data-slide="5" data-label="Quién es Telat">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-7 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-2">
+                            <span class="material-symbols-outlined text-sm">history</span> 05 — Quién es Telat
+                        </div>
+                        <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
+                            TECNOLOGÍA APLICADA A <span class="text-brandCeleste">LA EXPERIENCIA</span>
+                        </h2>
+                        
+                        <!-- Explosión de Frase de Aniversario -->
+                        <div class="bg-gradient-to-r from-brandCeleste/10 to-brandNaranja/10 border-l-4 border-brandNaranja p-4 rounded-r-xl mb-4 shadow-sm">
+                            <p class="font-body text-sm font-bold text-brandOscuro">
+                                Más de 20 años liderando de forma binacional la evolución de la Experiencia del Cliente e Inteligencia Artificial en México y USA (2005 - 2026).
+                            </p>
+                        </div>
+
+                        <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-6">
+                            No somos un contact center tradicional. Somos el brazo operativo y tecnológico que rediseña cómo se comunican las empresas líderes de soporte en el mercado de manera confiable.
+                        </p>
+                        
+                        <!-- Timeline de Crecimiento Exponencial de Personal -->
+                        <div class="mt-4 p-5 bg-white/90 backdrop-blur-md rounded-2xl border border-brandOscuro/10 shadow-xl">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-subheadings font-bold text-xs text-brandOscuro uppercase tracking-wider flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-brandNaranja text-base animate-icon-pulse">trending_up</span> Crecimiento Exponencial de Equipo
+                                </span>
+                                <span class="text-[0.65rem] font-extrabold text-brandNaranja bg-brandNaranja/10 px-3 py-1 rounded-full uppercase">2005 - 2026</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-6 items-end pt-2 h-40 border-b border-brandOscuro/10 pb-3">
+                                <!-- 2005 (7 personas) -->
+                                <div class="flex flex-col items-center justify-end group">
+                                    <span class="font-momo text-xs text-brandOscuro/70 mb-1 group-hover:scale-110 transition-transform">7 pers.</span>
+                                    <div class="w-full bg-gradient-to-t from-brandCeleste/40 to-brandCeleste rounded-t-lg h-5 transition-all duration-500 group-hover:brightness-110 relative border-t border-brandCeleste">
+                                        <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-brandCeleste rounded-full border-2 border-white"></div>
+                                    </div>
+                                    <div class="font-subheadings font-bold text-xs mt-2 text-brandOscuro">2005</div>
+                                    <div class="font-body text-[0.6rem] text-brandOscuro/60 text-center">Fundación</div>
+                                </div>
+
+                                <!-- 2015 (280 personas) -->
+                                <div class="flex flex-col items-center justify-end group">
+                                    <span class="font-momo text-sm text-brandCeleste font-bold mb-1 group-hover:scale-110 transition-transform">280 pers.</span>
+                                    <div class="w-full bg-gradient-to-t from-brandCeleste to-brandCeleste/80 rounded-t-lg h-16 transition-all duration-500 group-hover:brightness-110 relative shadow-md">
+                                        <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-brandCeleste rounded-full border-2 border-white animate-pulse"></div>
+                                    </div>
+                                    <div class="font-subheadings font-bold text-xs mt-2 text-brandOscuro">2015</div>
+                                    <div class="font-body text-[0.6rem] text-brandOscuro/60 text-center">Expansión México</div>
+                                </div>
+
+                                <!-- 2026 (+1,000 especialistas) -->
+                                <div class="flex flex-col items-center justify-end group">
+                                    <span class="font-momo text-xl text-brandNaranja font-black mb-1 group-hover:scale-125 transition-transform animate-bounce">+1,000</span>
+                                    <div class="w-full bg-gradient-to-t from-brandNaranja via-brandNaranja to-brandNaranjaClaro rounded-t-xl h-32 transition-all duration-500 group-hover:brightness-110 relative shadow-xl border-t-2 border-white">
+                                        <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-brandNaranja rounded-full border-2 border-white animate-ping"></div>
+                                        <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-brandNaranja rounded-full border-2 border-white"></div>
+                                    </div>
+                                    <div class="font-subheadings font-medium text-xs mt-2 text-brandNaranja">Actual</div>
+                                    <div class="font-body text-[0.65rem] font-normal text-brandNaranja text-center">Especialistas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna Derecha: Mapa de Hubs -->
+                    <div class="col-span-5 flex justify-center">
+                        <div class="bg-white p-5 rounded-2xl border border-brandCeleste/25 shadow-xl w-full max-w-md flex flex-col justify-between">
+                            <div class="flex justify-between items-center mb-2 pb-2 border-b border-brandOscuro/10">
+                                <h4 class="font-subheadings font-bold text-brandOscuro flex items-center gap-2 text-sm">
+                                    <span class="material-symbols-outlined text-brandCeleste animate-icon-pulse">map</span> Mapa Operativo de Hubs
+                                </h4>
+                                <span class="text-[0.65rem] font-extrabold text-brandCeleste bg-brandCeleste/10 px-2.5 py-0.5 rounded-full uppercase">Binacional US / MX</span>
+                            </div>
+
+                            <!-- Contenedor con Mapa HD Generado e Interactivo -->
+                            <div class="relative w-full h-48 bg-slate-950 rounded-xl overflow-hidden my-2 border border-brandOscuro/20 shadow-2xl flex items-center justify-center">
+                                <img src="mapa_hubs.png" alt="Mapa Operativo" class="absolute inset-0 w-full h-full object-cover opacity-80 select-none pointer-events-none">
+
+                                <!-- Estrellas y Pines sobre el Mapa -->
+                                <!-- 1. El Paso, TX (Punto Rojo) -->
+                                <div class="absolute top-[10%] left-[43.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="material-symbols-outlined text-brandNaranjaClaro text-2xl animate-star-glow" style="--glow-color: rgba(254, 202, 102, 1)">star</span>
+                                    <div class="bg-slate-900/95 text-brandNaranjaClaro text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranjaClaro/50 shadow-lg transition-transform group-hover:scale-105">
+                                        El Paso, TX (USA)
+                                    </div>
+                                </div>
+
+                                <!-- 2. Ciudad Juárez (Punto Verde) -->
+                                <div class="absolute top-[21%] left-[42.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="material-symbols-outlined text-brandCeleste text-2xl animate-star-glow" style="--glow-color: rgba(50, 132, 198, 1)">grade</span>
+                                    <div class="bg-slate-900/95 text-brandCeleste text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandCeleste/50 shadow-lg transition-transform group-hover:scale-105">
+                                        Cd. Juárez
+                                    </div>
+                                </div>
+
+                                <!-- 3. CDMX (Roma) (Punto Amarillo) -->
+                                <div class="absolute top-[76%] left-[54.5%] flex items-center gap-1.5 group cursor-pointer z-10">
+                                    <span class="material-symbols-outlined text-brandNaranja text-2xl animate-star-glow" style="--glow-color: rgba(235, 91, 39, 1)">stars</span>
+                                    <div class="bg-slate-900/95 text-brandNaranja text-[0.65rem] font-bold px-2 py-0.5 rounded border border-brandNaranja/60 shadow-lg transition-transform group-hover:scale-105">
+                                        CDMX (Roma)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lista Detallada de Hubs -->
+                            <div class="space-y-1.5 font-body text-xs text-brandOscuro/80 pt-2">
+                                <div class="flex items-center gap-2 p-1.5 bg-brandClaro rounded-lg border border-brandOscuro/5">
+                                    <span class="material-symbols-outlined text-brandNaranja text-sm">stars</span>
+                                    <div><strong class="text-brandOscuro">CDMX (Roma):</strong> Corporativo & Operaciones</div>
+                                </div>
+                                <div class="flex items-center gap-2 p-1.5 bg-brandClaro rounded-lg border border-brandOscuro/5">
+                                    <span class="material-symbols-outlined text-brandCeleste text-sm">grade</span>
+                                    <div><strong class="text-brandOscuro">Cd. Juárez:</strong> Soporte Crítico</div>
+                                </div>
+                                <div class="flex items-center gap-2 p-1.5 bg-brandNaranja/5 rounded-lg border border-brandNaranja/20">
+                                    <span class="material-symbols-outlined text-brandNaranjaClaro text-sm">star</span>
+                                    <div><strong class="text-brandNaranja">El Paso, TX:</strong> Hub Nearshore Bilingüe (EE. UU.)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIAPOSITIVA 7: METODOLOGÍA & DIAGNÓSTICO (CTA) -->
+            <section class="slide" data-slide="6" data-label="Diagnóstico">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
+                    <div class="col-span-6 flex flex-col justify-center text-left">
+                        <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-sm">task_alt</span> 06 — Diagnóstico
+                        </div>
+                        <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
+                            ¿CÓMO DIGITALIZAMOS <span class="text-brandNaranja">TU OPERACIÓN?</span>
+                        </h2>
+                        <p class="font-body text-sm text-brandOscuro/80 leading-relaxed mb-6">
+                            Analizamos tus flujos manuales actuales de soporte o back-office sin costo, diseñamos un prototipo de automatización con nuestra IA nativa y entregamos un modelo de ahorro y eficiencia operativa garantizado bajo contrato.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-brandCeleste/15 text-brandCeleste flex items-center justify-center font-bold text-sm">1</span>
+                                <p class="font-body text-xs font-bold text-brandOscuro">Mapeo y Auditoría de Procesos</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-brandNaranja/15 text-brandNaranja flex items-center justify-center font-bold text-sm">2</span>
+                                <p class="font-body text-xs font-bold text-brandOscuro">Desarrollo y Ajuste de Flujos en la Nube</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-brandCeleste/15 text-brandCeleste flex items-center justify-center font-bold text-sm">3</span>
+                                <p class="font-body text-xs font-bold text-brandOscuro">Integración de Ecosistema IA + Equipo Humano</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-span-6 flex justify-center">
+                        <div class="bg-white p-7 rounded-3xl border border-brandOscuro/10 shadow-2xl w-full max-w-md relative overflow-hidden" id="formContainer">
+                            <h4 class="font-subheadings font-bold text-lg text-brandOscuro mb-1">Solicita un Diagnóstico de Procesos</h4>
+                            <p class="font-body text-xs text-brandOscuro/60 mb-5">Un consultor especializado de Telat analizará tus flujos operativos sin costo.</p>
+                            
+                            <form onsubmit="handleFormSubmit(event)" class="space-y-3 font-body">
+                                <div>
+                                    <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Nombre Completo</label>
+                                    <input type="text" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Correo Electrónico Corporativo</label>
+                                    <input type="email" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Empresa</label>
+                                        <input type="text" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Puestos de Agentes</label>
+                                        <select class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none" id="budgetSelect">
+                                            <option value="1-10">1 a 10 agentes</option>
+                                            <option value="11-50">11 a 50 agentes</option>
+                                            <option value="51-200">51 a 200 agentes</option>
+                                            <option value="200+">+200 agentes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="w-full bg-brandNaranja text-white font-subheadings font-bold py-3 rounded-lg shadow-lg hover:bg-brandNaranja/90 transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-sm">schedule_send</span> Enviar Solicitud
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <!-- Form Success Container -->
+                        <div class="bg-white p-8 rounded-3xl border border-brandCeleste/30 shadow-2xl w-full max-w-md text-center hidden flex flex-col items-center justify-center gap-4" id="formSuccess">
+                            <span class="material-symbols-outlined text-emerald-600 text-6xl animate-bounce">check_circle</span>
+                            <h4 class="font-subheadings font-bold text-xl text-brandOscuro">¡Diagnóstico Solicitado!</h4>
+                            <p class="font-body text-xs text-brandOscuro/70 leading-relaxed">
+                                Hemos recibido tus datos de contacto con éxito. Un especialista de digitalización de Telat Group te enviará un correo en las siguientes 24 horas hábiles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER / CONTROLES DE DIAPOSITIVA -->
+        <footer class="flex justify-between items-center px-12 py-4 z-40 border-t border-brandOscuro/5 bg-brandClaro/90 backdrop-blur-md relative font-subheadings">
+            <div class="text-xs font-body text-brandOscuro/40 flex items-center gap-1.5">
+                <span class="font-bold text-brandOscuro/60">Digitalización de Procesos</span> — Telat Group
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="prevSlide()" class="w-10 h-10 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all border border-brandOscuro/10 shadow-sm" aria-label="Anterior">
+                    <span class="material-symbols-outlined text-xl">arrow_back</span>
+                </button>
+                <div class="bg-white border border-brandOscuro/10 rounded-full px-4 py-1.5 text-xs font-bold text-brandOscuro/80 tracking-wider shadow-sm flex items-center gap-1">
+                    <span id="current-slide-num">01</span> <span class="text-brandOscuro/30">/</span> <span id="total-slides-num">07</span>
+                </div>
+                <button onclick="nextSlide()" class="w-10 h-10 hover:bg-brandOscuro/5 text-brandOscuro rounded-full flex items-center justify-center transition-all border border-brandOscuro/10 shadow-sm" aria-label="Siguiente">
+                    <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CÓDIGO JS DE LA PRESENTACIÓN -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const drawerList = document.getElementById('drawerList');
+
+        // Generar lista en el menú Drawer
+        function initDrawer() {
+            drawerList.innerHTML = '';
+            slides.forEach((slide, idx) => {
+                const label = slide.getAttribute('data-label') || `Slide ${idx + 1}`;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-lg text-xs font-subheadings font-bold transition-all flex items-center gap-2 ${
+                    idx === currentSlide 
+                        ? 'bg-brandCeleste/10 text-brandCeleste border-l-4 border-brandCeleste' 
+                        : 'text-brandOscuro/80 hover:bg-brandOscuro/5'
+                }`;
+                btn.innerHTML = `<span class="material-symbols-outlined text-base">${
+                    idx === 0 ? 'home' : 'label_important'
+                }</span> ${label}`;
+                btn.onclick = () => {
+                    goToSlide(idx);
+                    toggleMenu();
+                };
+                drawerList.appendChild(btn);
+            });
+        }
+
+        function updateSlideUI() {
+            // Actualizar clase activa en slides
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Actualizar números de página
+            document.getElementById('current-slide-num').innerText = String(currentSlide + 1).padStart(2, '0');
+            document.getElementById('total-slides-num').innerText = String(totalSlides).padStart(2, '0');
+
+            // Actualizar barra de progreso superior
+            const pct = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('top-progress-bar').style.width = `${pct}%`;
+
+            // Actualizar estado del Drawer
+            const drawerBtns = drawerList.querySelectorAll('button');
+            drawerBtns.forEach((btn, idx) => {
+                if (idx === currentSlide) {
+                    btn.className = 'w-full text-left px-4 py-3 rounded-lg text-xs font-subheadings font-bold bg-brandCeleste/10 text-brandCeleste border-l-4 border-brandCeleste transition-all flex items-center gap-2';
+                } else {
+                    btn.className = 'w-full text-left px-4 py-3 rounded-lg text-xs font-subheadings font-bold text-brandOscuro/80 hover:bg-brandOscuro/5 transition-all flex items-center gap-2';
+                }
+            });
+        }
+
+        function goToSlide(idx) {
+            if (idx >= 0 && idx < totalSlides) {
+                currentSlide = idx;
+                updateSlideUI();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            } else {
+                goToSlide(0); // Volver al inicio al terminar
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            } else {
+                goToSlide(totalSlides - 1); // Ir al final
+            }
+        }
+
+        // Soporte para teclas de navegación (flechas)
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Menú Drawer Toggle
+        function toggleMenu() {
+            const drawer = document.getElementById('executiveDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Selector Interactivo de Casos de Éxito
+        function showCaseBlock(caseId, btnElement) {
+            // Ocultar todos los bloques de contenido
+            document.querySelectorAll('.case-content-block').forEach(block => {
+                block.classList.add('hidden');
+            });
+            // Mostrar bloque seleccionado
+            document.getElementById(`case-${caseId}`).classList.remove('hidden');
+
+            // Actualizar clases activas en los selectores
+            document.querySelectorAll('.case-selector-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-brandCeleste/10', 'text-brandCeleste', 'border-l-4', 'border-brandCeleste');
+                btn.classList.add('bg-white', 'text-brandOscuro');
+            });
+            btnElement.classList.add('active', 'bg-brandCeleste/10', 'text-brandCeleste', 'border-l-4', 'border-brandCeleste');
+            btnElement.classList.remove('bg-white', 'text-brandOscuro');
+
+            // Actualizar cabecera del card
+            const headerTitle = document.getElementById('case-header-title');
+            const headerBadge = document.getElementById('case-header-badge');
+            
+            const caseLabels = {
+                jail: { title: 'TELECOMUNICACIONES PENITENCIARIAS', badge: 'Caso Carcelario' },
+                auto: { title: 'COMPRA-VENTA DE VEHÍCULOS', badge: 'E-Commerce' },
+                security: { title: 'TECNOLOGÍA DE VIDEOVIGILANCIA', badge: 'Soporte Tier 1' },
+                gift: { title: 'TOMA DE PEDIDOS ESTACIONALES', badge: 'Upselling' },
+                custom: { title: 'PERSONALIZACIÓN DE MERCANCÍA', badge: 'Omnicanal' },
+                glass: { title: 'REEMPLAZO DE VIDRIOS AUTOS', badge: 'Geolocalizado' }
+            };
+
+            if (caseLabels[caseId]) {
+                headerTitle.innerHTML = `<span class="material-symbols-outlined text-brandCeleste text-lg">description</span> ${caseLabels[caseId].title}`;
+                headerBadge.innerText = caseLabels[caseId].badge;
+            }
+        }
+
+        // Formulario Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formContainer = document.getElementById('formContainer');
+            const formSuccess = document.getElementById('formSuccess');
+            if (formContainer && formSuccess) {
+                formContainer.classList.add('hidden');
+                formSuccess.classList.remove('hidden');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initDrawer();
+            updateSlideUI();
+            const firstBtn = document.querySelector('.case-selector-btn');
+            if (firstBtn) showCaseBlock('jail', firstBtn);
+        });
+    </script>
+</body>
+</html>
