@@ -802,37 +802,66 @@
                         </div>
                     </div>
                     
-                    <div class="col-span-6 flex justify-center">
-                        <div class="bg-white p-7 rounded-3xl border border-brandOscuro/10 shadow-2xl w-full max-w-md relative overflow-hidden" id="formContainer">
-                            <h4 class="font-subheadings font-bold text-lg text-brandOscuro mb-1">Solicita un Diagnóstico de Procesos</h4>
-                            <p class="font-body text-xs text-brandOscuro/60 mb-5">Un consultor especializado de Telat analizará tus flujos operativos sin costo.</p>
-                            
-                            <form onsubmit="handleFormSubmit(event)" class="space-y-3 font-body">
+                        <div class="bg-white p-6 rounded-2xl border border-brandOscuro/10 shadow-2xl flex flex-col justify-center max-w-lg mx-auto w-full relative min-h-[380px]" id="formContainer">
+                            <h3 class="font-subheadings font-bold text-sm text-brandOscuro mb-1 flex items-center gap-1.5 uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-brandCeleste">assignment_ind</span> Perfilamiento Operativo
+                            </h3>
+                            <p class="font-body text-[0.65rem] text-brandOscuro/60 mb-4">Seleccione las opciones que mejor describan su necesidad actual:</p>
+
+                            <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-3">
                                 <div>
-                                    <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Nombre Completo</label>
-                                    <input type="text" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Correo Electrónico Corporativo</label>
-                                    <input type="email" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
+                                    <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Nombre de la Empresa</label>
+                                    <input type="text" required placeholder="Escriba el nombre comercial" class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
                                 </div>
                                 <div class="grid grid-cols-2 gap-3">
                                     <div>
-                                        <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Empresa</label>
-                                        <input type="text" required class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none">
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Giro de Negocio</label>
+                                        <select required class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                                            <option value="" disabled selected>Seleccione giro</option>
+                                            <option value="finanzas">Servicios Financieros / Fintech</option>
+                                            <option value="retail">Retail / E-commerce</option>
+                                            <option value="telecom">Telecomunicaciones</option>
+                                            <option value="saas">SaaS / Tecnología</option>
+                                            <option value="salud">Salud / Logística</option>
+                                            <option value="otro">Otro Giro</option>
+                                        </select>
                                     </div>
                                     <div>
-                                        <label class="block text-[0.65rem] font-bold text-brandOscuro/60 uppercase mb-1">Puestos de Agentes</label>
-                                        <select class="w-full bg-brandClaro border border-brandOscuro/10 rounded-lg p-2.5 text-xs focus:border-brandCeleste focus:outline-none" id="budgetSelect">
-                                            <option value="1-10">1 a 10 agentes</option>
-                                            <option value="11-50">11 a 50 agentes</option>
-                                            <option value="51-200">51 a 200 agentes</option>
-                                            <option value="200+">+200 agentes</option>
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Colaboradores</label>
+                                        <select required class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                                            <option value="" disabled selected>Rango de posiciones</option>
+                                            <option value="10-50">10 a 50 posiciones</option>
+                                            <option value="51-150">51 a 150 posiciones</option>
+                                            <option value="151-500">151 a 500 posiciones</option>
+                                            <option value="500+">Más de 500 posiciones</option>
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="w-full bg-brandNaranja text-white font-subheadings font-bold py-3 rounded-lg shadow-lg hover:bg-brandNaranja/90 transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
-                                    <span class="material-symbols-outlined text-sm">schedule_send</span> Enviar Solicitud
+
+                                <!-- Sección de Moneda y Presupuesto Dinámico solicitado -->
+                                <div class="grid grid-cols-12 gap-3">
+                                    <div class="col-span-4">
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Moneda</label>
+                                        <select id="currencySelector" onchange="updateBudgetDropdown()" class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro font-semibold">
+                                            <option value="MXN" selected>MXN (M.N.)</option>
+                                            <option value="USD">USD (Dólar)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-8">
+                                        <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Presupuesto Mensual</label>
+                                        <select id="budgetSelector" required class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                                            <!-- Las opciones se inyectan dinámicamente con JS -->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[0.65rem] font-bold text-brandOscuro mb-1 uppercase tracking-wider">Correo Corporativo</label>
+                                    <input type="email" required placeholder="correo@empresa.com" class="w-full text-xs font-body p-2.5 rounded-lg border border-brandOscuro/10 focus:border-brandCeleste focus:outline-none bg-brandClaro">
+                                </div>
+
+                                <button type="submit" class="w-full bg-brandNaranja hover:bg-brandNaranja/90 text-white font-subheadings font-bold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 text-xs transition-all mt-4 focus:outline-none">
+                                    <span class="material-symbols-outlined text-sm">rocket_launch</span> Comenzar Proyecto de Servicio
                                 </button>
                             </form>
                         </div>
@@ -1009,6 +1038,40 @@
             }
         }
 
+        // Valores de presupuesto dinámicos según Moneda seleccionada
+        const budgetOptions = {
+            MXN: [
+                { value: "bajo", text: "Menos de $200,000 MXN" },
+                { value: "medio", text: "Entre $200,000 y $1,000,000 MXN" },
+                { value: "alto", text: "Entre $1,000,000 y $2,000,000 MXN" },
+                { value: "corporativo", text: "Más de $2,000,000 MXN" }
+            ],
+            USD: [
+                { value: "low", text: "Menos de $10,000 USD" },
+                { value: "mid", text: "Entre $10,000 y $50,000 USD" },
+                { value: "high", text: "Entre $50,000 y $100,000 USD" },
+                { value: "enterprise", text: "Más de $100,000 USD" }
+            ]
+        };
+
+        function updateBudgetDropdown() {
+            const currencySelector = document.getElementById('currencySelector');
+            const budgetSelector = document.getElementById('budgetSelector');
+            if (!currencySelector || !budgetSelector) return;
+
+            const currency = currencySelector.value;
+            budgetSelector.innerHTML = '<option value="" disabled selected>Rango estimado mensual</option>';
+
+            if (budgetOptions[currency]) {
+                budgetOptions[currency].forEach(opt => {
+                    const el = document.createElement('option');
+                    el.value = opt.value;
+                    el.innerText = opt.text;
+                    budgetSelector.appendChild(el);
+                });
+            }
+        }
+
         // Formulario Handler
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -1023,6 +1086,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             initDrawer();
             updateSlideUI();
+            updateBudgetDropdown();
             const firstBtn = document.querySelector('.case-selector-btn');
             if (firstBtn) showCaseBlock('jail', firstBtn);
         });
