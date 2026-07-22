@@ -1,126 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Pruebas Web</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --accent: #38bdf8;
-      --text: #f8fafc;
-      --text-secondary: #94a3b8;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telat Group - Portal de Soluciones y Presentaciones Ejecutivas</title>
+    
+    <!-- Google Fonts oficiales Telat (DM Sans & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandOscuro: '#222221',
+                        brandCeleste: '#3284C6',
+                        brandNaranja: '#EB5B27',
+                        brandNaranjaClaro: '#FECA66',
+                        brandClaro: '#FBFBFD',
+                    },
+                    fontFamily: {
+                        subheadings: ['DM Sans', 'sans-serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-    .container {
-      max-width: 700px;
-      width: 100%;
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: center;
-    }
+    <style>
+        :root {
+            --brand-celeste: #3284C6;
+            --brand-naranja: #EB5B27;
+            --brand-oscuro: #222221;
+            --brand-claro: #FBFBFD;
+        }
 
-    h1 {
-      color: var(--accent);
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+        body {
+            background-color: var(--brand-claro);
+            color: var(--brand-oscuro);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
 
-    p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(50, 132, 198, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
 
-    .status-badge {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      text-align: left;
-    }
-
-    .project-card {
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.25rem;
-      border-radius: 10px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-    }
-
-    .projects-list a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .project-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .project-card p {
-      font-size: 0.875rem;
-      margin-bottom: 0;
-    }
-  </style>
+        @keyframes icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+        .animate-icon-pulse { animation: icon-pulse 3s ease-in-out infinite; }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <span class="status-badge">⚡ Entorno de Pruebas Antigravity</span>
-    <h1>Mis Páginas Web de Prueba</h1>
-    <p>Espacio reservado para prototipado de páginas web antes de su publicación en la intranet empresarial.</p>
+<body class="tech-grid-bg antialiased selection:bg-brandNaranjaClaro selection:text-brandOscuro flex flex-col justify-between min-h-screen">
 
-    <div class="projects-list">
-      <a href="./Presentacion-Comercial/index.html">
-        <div class="project-card">
-          <h3>💼 Presentación Comercial (General)</h3>
-          <p>Proyecto de presentación comercial general y ventas corporativas.</p>
+    <!-- CABECERA PRINCIPAL -->
+    <header class="w-full border-b border-brandOscuro/10 bg-white/80 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-10 object-contain filter drop-shadow-sm">
+                <span class="text-gray-300 text-xl font-light">|</span>
+                <span class="text-xs font-subheadings font-bold text-brandOscuro/70 tracking-wider uppercase">Portal de Soluciones</span>
+            </div>
+            <div class="bg-brandNaranja/10 border border-brandNaranja/20 text-brandNaranja text-xs font-subheadings px-3.5 py-1 rounded-full font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-sm animate-icon-pulse">rocket_launch</span> Ecosistema Digital
+            </div>
         </div>
-      </a>
-      <a href="./Presentacion-Digitalizacion/index.html">
-        <div class="project-card" style="border-left: 4px solid #EB5B27;">
-          <h3>⚡ Presentación Comercial (Digitalización de Procesos e IA)</h3>
-          <p>Especialización comercial enfocada en la automatización de flujos BPO y virtualización operativa con IA.</p>
+    </header>
+
+    <!-- CONTENIDO MAESTRO -->
+    <main class="max-w-4xl mx-auto px-6 py-12 flex-grow flex flex-col justify-center">
+        
+        <!-- ENCABEZADO DE BIENVENIDA -->
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-3">
+                <span class="material-symbols-outlined text-base">domain</span> Telat Group &bull; Experiencia del Cliente e IA
+            </div>
+            <h1 class="font-body text-4xl sm:text-5xl font-extrabold text-brandOscuro mb-4 tracking-tight leading-tight">
+                PRESENTACIONES <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCeleste to-brandNaranja">EJECUTIVAS</span>
+            </h1>
+            <p class="font-body text-sm sm:text-base text-brandOscuro/75 max-w-xl mx-auto leading-relaxed">
+                Selecciona la propuesta comercial o de digitalización que deseas revisar. Cada presentación contiene datos interactivos y arquitectura BPO de alto nivel.
+            </p>
         </div>
-      </a>
-    </div>
-  </div>
+
+        <!-- LISTADO DE PROYECTOS / TARJETAS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- TARJETA 1: PRESENTACIÓN COMERCIAL GENERAL -->
+            <a href="./Presentacion-Comercial/index.html" class="group block">
+                <div class="h-full bg-white border border-brandCeleste/20 rounded-2xl p-7 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group-hover:border-brandCeleste">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brandCeleste/5 rounded-bl-full pointer-events-none group-hover:bg-brandCeleste/10 transition-colors"></div>
+                    
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center mb-4 group-hover:bg-brandCeleste group-hover:text-white transition-all duration-300">
+                            <span class="material-symbols-outlined text-2xl">business_center</span>
+                        </div>
+                        <span class="text-[0.65rem] font-subheadings font-bold uppercase tracking-wider text-brandCeleste bg-brandCeleste/10 px-2.5 py-0.5 rounded-full mb-2 inline-block">
+                            Propuesta General
+                        </span>
+                        <h3 class="font-subheadings font-bold text-xl text-brandOscuro mb-2 group-hover:text-brandCeleste transition-colors">
+                            Presentación Comercial
+                        </h3>
+                        <p class="font-body text-xs text-brandOscuro/70 leading-relaxed mb-6">
+                            Modelo integral de operaciones BPO, infraestructura binacional (USA / México), Contact Center omnicanal y métricas de escala comercial.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center text-xs font-subheadings font-bold text-brandCeleste group-hover:translate-x-1 transition-transform">
+                        Abrir Presentación <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TARJETA 2: PRESENTACIÓN DIGITALIZACIÓN E IA -->
+            <a href="./Presentacion-Digitalizacion/index.html" class="group block">
+                <div class="h-full bg-white border border-brandNaranja/20 rounded-2xl p-7 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group-hover:border-brandNaranja">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-brandNaranja/5 rounded-bl-full pointer-events-none group-hover:bg-brandNaranja/10 transition-colors"></div>
+                    
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center mb-4 group-hover:bg-brandNaranja group-hover:text-white transition-all duration-300">
+                            <span class="material-symbols-outlined text-2xl animate-icon-pulse">precision_manufacturing</span>
+                        </div>
+                        <span class="text-[0.65rem] font-subheadings font-bold uppercase tracking-wider text-brandNaranja bg-brandNaranja/10 px-2.5 py-0.5 rounded-full mb-2 inline-block">
+                            Especialización IA & Backoffice
+                        </span>
+                        <h3 class="font-subheadings font-bold text-xl text-brandOscuro mb-2 group-hover:text-brandNaranja transition-colors">
+                            Digitalización de Procesos e IA
+                        </h3>
+                        <p class="font-body text-xs text-brandOscuro/70 leading-relaxed mb-6">
+                            Ecosistema de virtualización de Backoffice, automatización documental de extremo a extremo e integración de agentes híbridos con Inteligencia Artificial.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center text-xs font-subheadings font-bold text-brandNaranja group-hover:translate-x-1 transition-transform">
+                        Abrir Presentación <span class="material-symbols-outlined text-base ml-1">arrow_forward</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA CORPORATIVO -->
+    <footer class="w-full border-t border-brandOscuro/10 bg-white/60 backdrop-blur-md py-6 text-center">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="text-xs font-body text-brandOscuro/60">
+                &copy; 2026 <strong>Telat Group</strong>. Todos los derechos reservados.
+            </div>
+            <div class="text-xs font-subheadings text-brandOscuro/50 font-medium flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-brandNaranja">auto_awesome</span> Tecnología Aplicada a la Experiencia
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
