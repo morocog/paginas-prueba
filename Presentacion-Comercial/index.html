@@ -135,6 +135,15 @@
       animation: float 6s ease-in-out infinite;
     }
 
+    @keyframes rotate-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-rotate-slow {
+      animation: rotate-slow 25s linear infinite;
+    }
+
     @keyframes icon-pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.15); }
@@ -235,7 +244,7 @@
     <!-- CONTENEDOR PRINCIPAL DE SLIDES -->
     <main class="slides-wrapper">
 
-      <!-- SLIDE 1: PORTADA & PROPUESTA DE VALOR -->
+      <!-- SLIDE 1: PORTADA & PROPUESTA DE VALOR (CON LOGO Y CÍRCULOS ANIMADOS) -->
       <section class="slide active" data-slide="0" data-label="Propuesta de Valor">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-7 flex flex-col justify-center text-left">
@@ -260,11 +269,11 @@
               </button>
             </div>
             
-            <!-- DATOS REALES (DATO FALSO 3,000 POSICIONES ELIMINADO Y SUSTITUIDO POR 650+ ESPECIALISTAS) -->
+            <!-- DATOS REALES (20+ AÑOS DE EXPERIENCIA EN LUGAR DE 650+ ESPECIALISTAS) -->
             <div class="grid grid-cols-4 gap-4 border-t border-brandOscuro/10 pt-4">
               <div>
-                <h4 class="font-momo text-2xl text-brandNaranja">650+</h4>
-                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">Especialistas IA</p>
+                <h4 class="font-momo text-2xl text-brandNaranja">20+ Años</h4>
+                <p class="font-body text-[0.65rem] text-brandOscuro/60 uppercase font-semibold">de Experiencia</p>
               </div>
               <div>
                 <h4 class="font-momo text-2xl text-brandCeleste">-65%</h4>
@@ -281,19 +290,13 @@
             </div>
           </div>
 
+          <!-- COLUMNA DERECHA CON CÍRCULOS ANIMADOS Y LOGO DE TELAT RESTAURADO -->
           <div class="col-span-5 flex justify-center items-center">
-            <div class="relative w-[420px] h-[420px] flex justify-center items-center">
-              <div class="absolute inset-0 bg-gradient-to-tr from-brandCeleste/20 to-brandNaranja/20 rounded-full blur-2xl animate-pulse"></div>
-              <div class="relative z-10 bg-white p-8 rounded-3xl border border-brandOscuro/10 shadow-2xl text-center space-y-6">
-                <img src="https://telat.mx/assets/img/logo.png" alt="Telat" class="h-16 mx-auto object-contain">
-                <div class="space-y-2">
-                  <h3 class="font-subheadings font-bold text-lg text-brandOscuro">Tecnología de Operaciones B2B</h3>
-                  <p class="font-body text-xs text-brandOscuro/70">Rediseñamos la interacción entre empresas y clientes con inteligencia artificial nativa y arquitectura de gobernanza.</p>
-                </div>
-                <div class="flex justify-center gap-3 pt-2">
-                  <span class="px-3 py-1 bg-brandCeleste/10 text-brandCeleste font-bold text-[0.65rem] rounded-full uppercase">Nearshore Bilingüe</span>
-                  <span class="px-3 py-1 bg-brandNaranja/10 text-brandNaranja font-bold text-[0.65rem] rounded-full uppercase">Auditoría 100% IA</span>
-                </div>
+            <div class="relative w-[440px] h-[440px] flex justify-center items-center">
+              <div class="absolute inset-0 border-2 border-dashed border-brandCeleste/30 rounded-full animate-rotate-slow"></div>
+              <div class="absolute inset-8 border border-brandNaranja/20 rounded-full animate-pulse"></div>
+              <div class="absolute inset-16 bg-gradient-to-tr from-brandCeleste/10 via-white to-brandNaranja/10 rounded-full shadow-2xl flex items-center justify-center border border-white">
+                <img src="https://telat.mx/assets/img/logo.png" alt="Telat Group" class="h-20 object-contain drop-shadow-md animate-float">
               </div>
             </div>
           </div>
@@ -427,12 +430,12 @@
       </section>
 
 
-      <!-- SLIDE 5: AUDITORÍA QA IA -->
+      <!-- SLIDE 5: AUDITORÍA QA INTELIGENTE & ESCALABLE (REFINADA) -->
       <section class="slide" data-slide="4" data-label="Auditoría QA">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-6 h-[400px] relative rounded-3xl bg-[#222221] p-2 glow-frame-celeste overflow-hidden">
             <div class="absolute top-4 left-4 bg-white border-2 border-brandNaranjaClaro text-brandOscuro font-momo px-4 py-1 rounded-full text-sm z-20 shadow-md">
-              3. QA Audit 100%
+              3. QA Scalable Audit
             </div>
             <div class="w-full h-full rounded-2xl overflow-hidden relative pointer-events-none bg-black">
               <iframe src="https://player.vimeo.com/video/1205962477?background=1&autopause=0&autoplay=1&loop=1&byline=0&title=0&muted=1"
@@ -446,10 +449,10 @@
               <span class="material-symbols-outlined text-sm">high_quality</span> Auditoría Inteligente
             </div>
             <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
-              AUDITORÍA QA INTELIGENTE <span class="text-brandCeleste">(100% DE LLAMADAS)</span>
+              AUDITORÍA QA INTELIGENTE <span class="text-brandCeleste">& COBERTURA ESCALABLE</span>
             </h2>
             <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-6">
-              Visibilidad operativa que trasciende los límites humanos. Nuestra Inteligencia Artificial transcribe, analiza el sentimiento y evalúa el apego al script en la totalidad de las interacciones, identificando riesgos de reputación de forma preventiva.
+              Superamos la muestra tradicional del 1% al 2% de los BPOs convencionales. Nuestra Inteligencia Artificial le permite elevar la cobertura de auditoría al porcentaje exacto que requiera su empresa, campaña u operación, optimizando costos y garantizando un apego total a sus estándares de marca.
             </p>
             <div class="space-y-3">
               <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
@@ -458,7 +461,7 @@
               </div>
               <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
                 <span class="material-symbols-outlined text-brandNaranja">analytics</span>
-                <span class="text-xs font-bold text-brandOscuro">Retroalimentación Operativa Dinámica e Inmediata</span>
+                <span class="text-xs font-bold text-brandOscuro">Cobertura a la Medida y Optimización Financiera</span>
               </div>
             </div>
           </div>
@@ -466,106 +469,103 @@
       </section>
 
 
-      <!-- SLIDE 6: SUITE DE BLINDAJE OPERATIVO -->
-      <section class="slide" data-slide="5" data-label="Suite Telat IA">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
-          <div class="col-span-12 text-center mb-2">
-            <div class="inline-flex items-center gap-2 text-brandNaranja font-subheadings uppercase text-xs font-bold tracking-widest mb-2">
-              <span class="material-symbols-outlined text-sm">shield</span> Suite de Control
-            </div>
-            <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro leading-tight">
-              HERRAMIENTAS DE BLINDAJE Y <span class="text-brandNaranja">GOBERNANZA OPERATIVA</span>
-            </h2>
-          </div>
-
-          <div class="col-span-12 grid grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center font-bold">
-                <span class="material-symbols-outlined">military_tech</span>
-              </div>
-              <h4 class="font-subheadings font-bold text-base text-brandOscuro">Kudos 3.0</h4>
-              <p class="font-body text-xs text-gray-600 leading-relaxed">Gamificación e incentivos transparentes que motivan al personal en piso, reduciendo la rotación y protegiendo la calidad.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center font-bold">
-                <span class="material-symbols-outlined">qr_code_scanner</span>
-              </div>
-              <h4 class="font-subheadings font-bold text-base text-brandOscuro">Torre de Control</h4>
-              <p class="font-body text-xs text-gray-600 leading-relaxed">Auditoría biométrica cruzando accesos físicos QR con conexiones activas en CXone para eliminar la facturación inactiva.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center font-bold">
-                <span class="material-symbols-outlined">monitor_heart</span>
-              </div>
-              <h4 class="font-subheadings font-bold text-base text-brandOscuro">Agent States</h4>
-              <p class="font-body text-xs text-gray-600 leading-relaxed">Alertas automáticas de llamadas cortadas (<15s) y monitoreo de brincos de estado para evitar evasión de colas.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-all space-y-3">
-              <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center font-bold">
-                <span class="material-symbols-outlined">traffic</span>
-              </div>
-              <h4 class="font-subheadings font-bold text-base text-brandOscuro">Smart Time Blocks</h4>
-              <p class="font-body text-xs text-gray-600 leading-relaxed">Semáforo inteligente que bloquea capacitaciones y reuniones durante picos de volumen para blindar sus SLAs.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- SLIDE 7: CASOS DE ÉXITO Y RESULTADOS -->
-      <section class="slide" data-slide="6" data-label="Casos de Éxito">
+      <!-- SLIDE 6: NUESTROS LOGROS EN EXCELENCIA OPERATIVA (VERSION OFICIAL PRESENTACION-DIGITALIZACION) -->
+      <section class="slide" data-slide="5" data-label="Excelencia Operativa">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-5 flex flex-col justify-center text-left">
             <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-3">
-              <span class="material-symbols-outlined text-sm">trophy</span> Impacto Real
+              <span class="material-symbols-outlined text-sm">trophy</span> Caso de Éxito
             </div>
             <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
-              RESULTADOS COMPROBADOS <span class="text-brandCeleste">POR INDUSTRIA</span>
+              NUESTROS LOGROS EN <span class="text-brandCeleste">EXCELENCIA OPERATIVA</span>
             </h2>
             <p class="font-body text-xs text-brandOscuro/80 leading-relaxed mb-6">
-              Nuestra combinación de talento bilingüe especializado e Inteligencia Artificial genera resultados medibles en sectores altamente exigentes.
+              Transformación comprobada de operaciones tradicionales en arquitecturas inteligentes de alto rendimiento.
             </p>
             <div class="p-4 bg-brandCeleste/10 rounded-2xl border border-brandCeleste/20">
               <div class="font-momo text-3xl text-brandCeleste mb-1">+20 Años</div>
-              <div class="font-body text-xs font-bold text-brandOscuro">de liderazgo continuado y casos de éxito en empresas líderes de EE. UU. y México.</div>
+              <div class="font-body text-xs font-bold text-brandOscuro">de liderazgo binacional y casos de éxito en empresas de soporte de alto impacto.</div>
             </div>
           </div>
 
+          <!-- GRID DE 6 CASOS DE ÉXITO EMBLEMÁTICOS CON ICONOGRAFÍA EXACTA -->
           <div class="col-span-7 grid grid-cols-2 gap-4">
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-md">
-              <div class="text-brandNaranja font-bold text-xs uppercase mb-1">Telecomunicaciones</div>
-              <h5 class="font-subheadings font-bold text-sm text-brandOscuro mb-2">Atención & Retención B2B</h5>
-              <p class="font-body text-[0.7rem] text-gray-600">Reducción del 40% en tiempo de resolución mediante enrutamiento asistido por copiloto IA.</p>
+            <!-- 1. Telecom. y Servicios (USA) -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">contact_phone</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">1. Telecom. y Servicios (USA)</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Enrutamiento inteligente B2B y soporte técnico especializado binacional.</p>
+              </div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-md">
-              <div class="text-brandCeleste font-bold text-xs uppercase mb-1">Autopartes & Logistics</div>
-              <h5 class="font-subheadings font-bold text-sm text-brandOscuro mb-2">Soporte Nearshore US/MX</h5>
-              <p class="font-body text-[0.7rem] text-gray-600">Virtualización de procesos de backoffice y consulta técnica de catálogos en tiempo real.</p>
+
+            <!-- 2. E-Commerce Autos (USA) -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">directions_car</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">2. E-Commerce Autos (USA)</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Virtualización de catálogo e interacciones asistidas para ventas aceleradas.</p>
+              </div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-md">
-              <div class="text-brandNaranja font-bold text-xs uppercase mb-1">Retail & E-Commerce</div>
-              <h5 class="font-subheadings font-bold text-sm text-brandOscuro mb-2">Atención Estacional Pico</h5>
-              <p class="font-body text-[0.7rem] text-gray-600">Escalamiento ágil con 99.6% de precisión en captura de pedidos y atención omnicanal.</p>
+
+            <!-- 3. Videovigilancia Inteligente -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">videocam</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">3. Videovigilancia Inteligente</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Monitoreo activo de eventos críticos con respuesta inmediata en tiempo real.</p>
+              </div>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-md">
-              <div class="text-brandCeleste font-bold text-xs uppercase mb-1">Fintech & Servicios</div>
-              <h5 class="font-subheadings font-bold text-sm text-brandOscuro mb-2">Auditoría & Refund Tracker</h5>
-              <p class="font-body text-[0.7rem] text-gray-600">Procesamiento seguro de evidencias transaccionales eliminando errores de captura.</p>
+
+            <!-- 4. Pedidos y Ventas Estacionales -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">shopping_bag</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">4. Pedidos y Ventas Estacionales</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Escalamiento ágil durante picos de demanda con 99.6% de precisión.</p>
+              </div>
+            </div>
+
+            <!-- 5. Personalización Omnicanal -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandCeleste/10 text-brandCeleste flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">palette</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">5. Personalización Omnicanal</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Ecosistema unificado (Chat, SMS, Email) con validación de especificaciones.</p>
+              </div>
+            </div>
+
+            <!-- 6. Autopartes Automotrices (USA) -->
+            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-md flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brandNaranja/10 text-brandNaranja flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined">build</span>
+              </div>
+              <div>
+                <h5 class="font-subheadings font-bold text-xs text-brandOscuro mb-1">6. Autopartes Automotrices (USA)</h5>
+                <p class="font-body text-[0.68rem] text-gray-600 leading-tight">Procesamiento de órdenes complejas con cero errores de compatibilidad.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
 
-      <!-- SLIDE 8: QUIÉN ES TELAT & MAPA DE HUBS (CAPTURA 2 MEJORADA CON HISTORIAL DE 4 HITOS) -->
-      <section class="slide" data-slide="7" data-label="Quién es Telat">
+      <!-- SLIDE 7: QUIÉN ES TELAT & MAPA DE HUBS (SIN NUMERO EN BADGE) -->
+      <section class="slide" data-slide="6" data-label="Quién es Telat">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-7 flex flex-col justify-center">
             <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-2">
-              <span class="material-symbols-outlined text-sm">history</span> 08 — Quién es Telat
+              <span class="material-symbols-outlined text-sm">history</span> Quién es Telat
             </div>
             <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-3 text-brandOscuro">
               TECNOLOGÍA APLICADA A <span class="text-brandCeleste">LA EXPERIENCIA</span>
@@ -581,7 +581,7 @@
               No somos un contact center convencional. Somos un socio tecnológico y operativo que impulsa la excelencia de marcas líderes.
             </p>
             
-            <!-- TIMELINE DE 4 HITOS (ACTUALIZADO: 2005, 2015, 2022 PICO PRE-IA Y JUNIO 2026 ERA POST-IA) -->
+            <!-- TIMELINE DE 4 HITOS -->
             <div class="p-4 bg-white/90 backdrop-blur-md rounded-2xl border border-brandOscuro/10 shadow-xl relative overflow-hidden">
               <div class="flex justify-between items-center mb-2">
                 <span class="font-subheadings font-bold text-xs text-brandOscuro uppercase tracking-wider flex items-center gap-1.5">
@@ -644,7 +644,7 @@
             </div>
           </div>
           
-          <!-- COLUMNA DERECHA: MAPA DE HUBS HD -->
+          <!-- MAPA DE HUBS HD -->
           <div class="col-span-5 flex justify-center">
             <div class="bg-white p-5 rounded-2xl border border-brandCeleste/25 shadow-xl w-full max-w-md flex flex-col justify-between space-y-2">
               <div class="flex justify-between items-center mb-1 pb-1 border-b border-brandOscuro/10">
@@ -699,12 +699,12 @@
       </section>
 
 
-      <!-- SLIDE 9: INFRAESTRUCTURA Y CERTIFICACIONES (CAPTURA 1 CONSERVADA EXACTA) -->
-      <section class="slide" data-slide="8" data-label="Certificaciones">
+      <!-- SLIDE 8: INFRAESTRUCTURA Y CERTIFICACIONES (RIBBON CORREGIDO 100% VISIBLE Y SIN NUMERO EN BADGE) -->
+      <section class="slide" data-slide="7" data-label="Certificaciones">
         <div class="w-full max-w-7xl relative z-20 space-y-4">
           <div class="text-left mb-2">
             <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-1">
-              <span class="material-symbols-outlined text-sm">workspace_premium</span> 09 — Confianza
+              <span class="material-symbols-outlined text-sm">workspace_premium</span> Confianza
             </div>
             <h2 class="font-momo text-4xl lg:text-5xl text-brandOscuro leading-tight">
               INFRAESTRUCTURA Y <span class="text-brandCeleste">CERTIFICACIONES</span>
@@ -712,12 +712,14 @@
           </div>
 
           <div class="grid grid-cols-12 gap-6">
-            <!-- ORGANIZACIÓN CERTIFICADA INTERNACIONALMENTE -->
-            <div class="col-span-7 bg-white p-5 rounded-2xl border border-emerald-500/30 shadow-lg relative overflow-hidden">
-              <div class="absolute -top-3 -right-3 bg-brandNaranja text-white font-momo text-[0.65rem] px-6 py-1 rotate-12 shadow-md uppercase">Confianza</div>
-              <h4 class="font-subheadings font-bold text-xs text-emerald-600 uppercase tracking-wider mb-4 flex items-center gap-1">
-                <span class="material-symbols-outlined text-sm">verified</span> Organización Certificada Internacionalmente
-              </h4>
+            <!-- ORGANIZACIÓN CERTIFICADA INTERNACIONALMENTE (RIBBON NÍTIDO Y TOTALMENTE VISIBLE) -->
+            <div class="col-span-7 bg-white p-5 rounded-2xl border border-emerald-500/30 shadow-lg relative">
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="font-subheadings font-bold text-xs text-emerald-600 uppercase tracking-wider flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm">verified</span> Organización Certificada Internacionalmente
+                </h4>
+                <span class="bg-brandNaranja text-white font-momo text-xs px-3.5 py-1 rounded-full uppercase shadow-md tracking-wider">Confianza</span>
+              </div>
               
               <div class="grid grid-cols-3 gap-3 text-center">
                 <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-100">
@@ -827,12 +829,12 @@
       </section>
 
 
-      <!-- SLIDE 10: METODOLOGÍA: EL CAMINO DE LA EFICIENCIA (CAPTURA 3 MEJORADA) -->
-      <section class="slide" data-slide="9" data-label="Metodología">
+      <!-- SLIDE 9: METODOLOGÍA: EL CAMINO DE LA EFICIENCIA (SIN NUMERO EN BADGE) -->
+      <section class="slide" data-slide="8" data-label="Metodología">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-4 flex flex-col justify-center text-left">
             <div class="inline-flex items-center gap-2 text-brandCeleste font-subheadings uppercase text-xs font-bold tracking-widest mb-3">
-              <span class="material-symbols-outlined text-sm">route</span> 10 — Metodología
+              <span class="material-symbols-outlined text-sm">route</span> Metodología
             </div>
             <h2 class="font-momo text-4xl lg:text-5xl leading-tight mb-4 text-brandOscuro">
               EL CAMINO DE LA <span class="text-brandCeleste">EFICIENCIA</span>
@@ -907,8 +909,8 @@
       </section>
 
 
-      <!-- SLIDE 11: FORMULARIO DE CONTACTO (FORMULARIO CONSERVADO TAL CUAL ORIGINAL) -->
-      <section class="slide" data-slide="10" data-label="Contacto">
+      <!-- SLIDE 10: FORMULARIO DE CONTACTO (CON DATOS OFICIALES DE OSCAR GÓMEZ) -->
+      <section class="slide" data-slide="9" data-label="Contacto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full max-w-7xl items-center relative z-20">
           <div class="col-span-5 flex flex-col justify-center text-left">
             <div
@@ -925,19 +927,20 @@
               demoras.
             </p>
 
+            <!-- DATOS OFICIALES ACTUALIZADOS -->
             <div class="space-y-3">
               <div class="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-brandOscuro/5 shadow-sm">
                 <span class="material-symbols-outlined text-brandCeleste">mail</span>
                 <div class="text-xs font-body">
                   <h5 class="font-bold text-brandOscuro">Dirección Comercial</h5>
-                  <p class="text-brandOscuro/70">contacto@telatgroup.com</p>
+                  <p class="text-brandOscuro/80 font-semibold">oscar.gomez@telat-group.com</p>
                 </div>
               </div>
               <div class="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-brandOscuro/5 shadow-sm">
                 <span class="material-symbols-outlined text-brandCeleste">call</span>
                 <div class="text-xs font-body">
                   <h5 class="font-bold text-brandOscuro">Línea Directa</h5>
-                  <p class="text-brandOscuro/70">+52 (462) 689-9555</p>
+                  <p class="text-brandOscuro/80 font-semibold">Tel: 55 4626 8990 &nbsp;|&nbsp; Cel: 55 5507 6997</p>
                 </div>
               </div>
             </div>
@@ -1050,7 +1053,7 @@
         id="prevBtn" onclick="prevSlide()" aria-label="Anterior">
         <span class="material-symbols-outlined text-lg">arrow_back</span>
       </button>
-      <span class="font-subheadings font-bold text-xs text-brandOscuro/80" id="slideIndicatorNum">01 / 11</span>
+      <span class="font-subheadings font-bold text-xs text-brandOscuro/80" id="slideIndicatorNum">01 / 10</span>
       <button
         class="w-10 h-10 hover:bg-brandCeleste hover:text-white rounded-full flex items-center justify-center transition-all disabled:opacity-20 disabled:pointer-events-none"
         id="nextBtn" onclick="nextSlide()" aria-label="Siguiente">
