@@ -386,29 +386,22 @@ function closeLiveAgentModal() {
   if (modal) modal.classList.remove('open');
 }
 
-function triggerElevenLabsCall() {
-  // Intentar hacer click programático en la sombra del custom element de ElevenLabs o el widget flotante
-  const convaiEl = document.querySelector('elevenlabs-convai');
-  if (convaiEl && convaiEl.shadowRoot) {
-    const startBtn = convaiEl.shadowRoot.querySelector('button') || convaiEl.shadowRoot.querySelector('[role="button"]');
-    if (startBtn) {
-      startBtn.click();
-      return;
-    }
-  }
-
-  // Fallback: Buscar cualquier botón flotante de ElevenLabs en la página
-  const allBtns = Array.from(document.querySelectorAll('button'));
-  const callBtn = allBtns.find(b => b.textContent && (b.textContent.includes('Start a call') || b.textContent.includes('Iniciar') || b.textContent.includes('Call')));
-  if (callBtn) {
-    callBtn.click();
-  } else {
-    alert("Por favor haz clic en la tarjeta flotante 'Start a call' que aparece abajo a la derecha en tu pantalla.");
-  }
+function launchNativeElevenLabsWindow() {
+  const previewUrl = 'https://elevenlabs.io/app/agents/agents/agent_1101kyjnvcjwedr9k5vga3xz25yp/preview?include_draft=true&branchId=agtbrch_4801kyjnvdftezatta397kx6gq4v';
+  const width = 640;
+  const height = 780;
+  const left = (window.screen.width / 2) - (width / 2);
+  const top = (window.screen.height / 2) - (height / 2);
+  
+  window.open(
+    previewUrl,
+    'ElevenLabsVoiceAgent',
+    `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`
+  );
 }
 
 // Exponer explícitamente a window para onclick attributes
-window.triggerElevenLabsCall = triggerElevenLabsCall;
+window.launchNativeElevenLabsWindow = launchNativeElevenLabsWindow;
 window.openLiveAgentModal = openLiveAgentModal;
 window.closeLiveAgentModal = closeLiveAgentModal;
 
