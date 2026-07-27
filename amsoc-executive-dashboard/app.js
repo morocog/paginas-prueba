@@ -133,6 +133,11 @@ function setupEventListeners() {
     btnTestAgent.addEventListener('click', openLiveAgentModal);
   }
 
+  const btnStartVoice = document.getElementById('btnStartVoiceWidget');
+  if (btnStartVoice) {
+    btnStartVoice.addEventListener('click', triggerElevenLabsCall);
+  }
+
   // Export CSV
   const btnExport = document.getElementById('btnExportCsv');
   if (btnExport) {
@@ -406,6 +411,11 @@ function triggerElevenLabsCall() {
     alert("Por favor haz clic en la tarjeta flotante 'Start a call' que aparece abajo a la derecha en tu pantalla.");
   }
 }
+
+// Exponer explícitamente a window para onclick attributes
+window.triggerElevenLabsCall = triggerElevenLabsCall;
+window.openLiveAgentModal = openLiveAgentModal;
+window.closeLiveAgentModal = closeLiveAgentModal;
 
 function exportToCsv() {
   if (currentRecords.length === 0) {
