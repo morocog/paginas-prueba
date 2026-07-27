@@ -386,6 +386,27 @@ function closeLiveAgentModal() {
   if (modal) modal.classList.remove('open');
 }
 
+function triggerElevenLabsCall() {
+  // Intentar hacer click programático en la sombra del custom element de ElevenLabs o el widget flotante
+  const convaiEl = document.querySelector('elevenlabs-convai');
+  if (convaiEl && convaiEl.shadowRoot) {
+    const startBtn = convaiEl.shadowRoot.querySelector('button') || convaiEl.shadowRoot.querySelector('[role="button"]');
+    if (startBtn) {
+      startBtn.click();
+      return;
+    }
+  }
+
+  // Fallback: Buscar cualquier botón flotante de ElevenLabs en la página
+  const allBtns = Array.from(document.querySelectorAll('button'));
+  const callBtn = allBtns.find(b => b.textContent && (b.textContent.includes('Start a call') || b.textContent.includes('Iniciar') || b.textContent.includes('Call')));
+  if (callBtn) {
+    callBtn.click();
+  } else {
+    alert("Por favor haz clic en la tarjeta flotante 'Start a call' que aparece abajo a la derecha en tu pantalla.");
+  }
+}
+
 function exportToCsv() {
   if (currentRecords.length === 0) {
     alert("No hay registros para exportar.");

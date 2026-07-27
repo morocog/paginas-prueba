@@ -208,9 +208,17 @@
       </div>
       <div class="modal-body" style="padding: 1.5rem 0;">
         <p style="color: #9CA3AF; font-size: 0.9rem; margin-bottom: 1.5rem;">
-          Presiona el micrófono a continuación para simular una llamada saliente en tiempo real con el Agente Conversacional de ElevenLabs. Al finalizar, los datos se volcarán automáticamente a tu Google Sheet.
+          El Agente Conversacional de ElevenLabs está listo. Haz clic en el botón verde a continuación o en la tarjeta flotante <strong>"Start a call"</strong> abajo a la derecha para iniciar la conversación por micrófono.
         </p>
-        <div style="display: flex; justify-content: center; min-height: 180px; align-items: center;">
+
+        <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+          <button id="btnStartVoiceWidget" onclick="triggerElevenLabsCall()" style="background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%); border: none; color: #FFFFFF; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; padding: 0.85rem 2rem; border-radius: 9999px; cursor: pointer; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4); display: inline-flex; items-center: center; gap: 0.6rem; transition: all 0.2s ease;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            📞 Iniciar Llamada de Voz
+          </button>
+        </div>
+
+        <div style="display: flex; justify-content: center; min-height: 100px; align-items: center;">
           <elevenlabs-convai agent-id="agent_1101kyjnvcjwedr9k5vga3xz25yp"></elevenlabs-convai>
         </div>
       </div>
