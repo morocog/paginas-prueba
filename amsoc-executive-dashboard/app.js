@@ -133,11 +133,6 @@ function setupEventListeners() {
     btnTestAgent.addEventListener('click', openLiveAgentModal);
   }
 
-  const btnStartVoice = document.getElementById('btnStartVoiceWidget');
-  if (btnStartVoice) {
-    btnStartVoice.addEventListener('click', triggerElevenLabsCall);
-  }
-
   // Export CSV
   const btnExport = document.getElementById('btnExportCsv');
   if (btnExport) {
