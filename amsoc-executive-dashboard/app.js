@@ -97,6 +97,8 @@ const DEMO_RECORDS = [
     motivo_rechazo: "N/A",
     resumen: "Asistencia confirmada. Registró su correo corporativo para recibir pase de acceso con QR."
   }
+];
+
 // Verified Live Call Records from Google Sheets
 const REAL_SHEETS_RECORDS = [
   {
