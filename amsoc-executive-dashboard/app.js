@@ -175,8 +175,11 @@ async function fetchLiveData() {
   const statusEl = document.getElementById('liveSyncText');
   if (statusEl) statusEl.textContent = 'Sincronizando...';
 
+  // Forzar siempre la URL de la API activa y limpia
+  const activeApiUrl = 'https://script.google.com/macros/s/AKfycbwXU8hk8JUN4N0sDY61X5lWh-RRGHpcI5jedFQ3Sy00Aiv0BfH8FqI8Y-VJei22chWA/exec?action=data';
+
   try {
-    const res = await fetch(gasApiUrl, { redirect: 'follow' });
+    const res = await fetch(activeApiUrl, { redirect: 'follow' });
     const data = await res.json();
     const rows = data.data || data.records || [];
     
@@ -188,7 +191,7 @@ async function fetchLiveData() {
           status: r.estatus || 'Confirmado',
           email: r.correo || 'N/A',
           representative: r.representante || 'N/A',
-          summary: `[Llamada Real Saliente] Confirmación de ${r.contacto || 'Contacto'}. Estatus: ${r.estatus || 'Confirmado'}. Correo: ${r.correo || 'N/A'}.`,
+          summary: r.resumen || `[Llamada Real Saliente] Confirmación de ${r.contacto}. Estatus: ${r.estatus}. Correo: ${r.correo}.`,
           time: timeStr || 'En vivo',
           name: r.contacto || 'Contacto Real',
           phone: r.telefono || 'Twilio MX'
