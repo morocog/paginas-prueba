@@ -154,12 +154,6 @@ function setupEventListeners() {
     });
   });
 
-  // Settings / Connect Webhook Modal
-  const btnConnect = document.getElementById('btnConnectWebhook');
-  if (btnConnect) {
-    btnConnect.addEventListener('click', promptWebhookUrl);
-  }
-
   // Test Live Agent Modal
   const btnTestAgent = document.getElementById('btnTestAgentLive');
   if (btnTestAgent) {
@@ -204,7 +198,7 @@ function fetchLiveData() {
   script.onerror = function() {
     console.warn('JSONP fetch failed, falling back to cached demo view.');
     renderDashboard(currentRecords);
-    if (statusEl) statusEl.textContent = 'En Vivo (Sincronizado)';
+    if (statusEl) statusEl.textContent = 'En Vivo (Google Sheets)';
   };
   document.body.appendChild(script);
 }
@@ -232,25 +226,13 @@ window.handleGoogleSheetsData = function(data) {
 
     currentRecords = [...realRecords.reverse(), ...DEMO_RECORDS];
     renderDashboard(currentRecords);
-    if (statusEl) statusEl.textContent = `En Vivo (${realRecords.length} llamadas reales + Demo)`;
+    if (statusEl) statusEl.textContent = 'En Vivo (Google Sheets)';
   } else {
     currentRecords = [...REAL_SHEETS_RECORDS, ...DEMO_RECORDS];
     renderDashboard(currentRecords);
-    if (statusEl) statusEl.textContent = 'En Vivo (1 llamada real + Demo)';
+    if (statusEl) statusEl.textContent = 'En Vivo (Google Sheets)';
   }
 };
-
-function promptWebhookUrl() {
-  const current = localStorage.getItem('AMSOC_GAS_URL') || gasApiUrl;
-  const inputUrl = prompt('Ingresa la URL de la Aplicación Web de Google Apps Script (doGet):', current);
-  if (inputUrl !== null) {
-    localStorage.setItem('AMSOC_GAS_URL', inputUrl.trim());
-    gasApiUrl = inputUrl.trim();
-    if (gasApiUrl) {
-      fetchLiveData();
-    }
-  }
-}
 
 function renderDashboard(records) {
   calculateAndRenderKPIs(records);
