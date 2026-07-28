@@ -102,12 +102,13 @@ const DEMO_RECORDS = [
 // Verified Live Call Records from Google Sheets
 const REAL_SHEETS_RECORDS = [
   {
-    id: "conv_real_1",
-    status: "Confirmado",
-    email: "luis@empresa.com",
-    representative: "Ninguno (Asiste Solo)",
-    summary: "[Llamada Real Saliente] Confirmación directa de Luis Cortina. Asistencia individual confirmada a la Convención Binacional AMSOC 2026.",
-    time: "07:09 PM",
+    fecha: "2026-07-27 19:09:00",
+    call_id: "conv_real_1",
+    estatus_asistencia: "Confirmado",
+    correo_confirmado: "luis@empresa.com",
+    nombre_representante: "Ninguno (Asiste Solo)",
+    motivo_rechazo: "N/A",
+    resumen: "[Llamada Real Saliente] Confirmación directa de Luis Cortina. Asistencia individual confirmada a la Convención Binacional AMSOC 2026.",
     name: "Luis Cortina",
     phone: "+52 55 5248 3354"
   }
@@ -214,16 +215,18 @@ window.handleGoogleSheetsData = function(data) {
   
   if (data && data.status === 'success' && Array.isArray(rows) && rows.length > 0) {
     const realRecords = rows.map((r, index) => {
-      const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.split('T')[1].slice(0, 5) : String(r.fecha).slice(11, 16)) : 'En vivo';
+      const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.replace('T', ' ').slice(0, 19) : String(r.fecha)) : '2026-07-27 19:09:00';
+      const statusVal = r.estatus || r.estatus_asistencia || r.status || 'Confirmado';
       return {
-        id: `conv_real_${index + 1}`,
-        status: r.estatus || 'Confirmado',
-        email: r.correo || 'N/A',
-        representative: r.representante || 'N/A',
-        summary: r.resumen || `[Llamada Real Saliente] Confirmación de ${r.contacto}. Estatus: ${r.estatus}. Correo: ${r.correo}.`,
-        time: timeStr || 'En vivo',
-        name: r.contacto || 'Contacto Real',
-        phone: r.telefono || 'Twilio MX'
+        fecha: timeStr,
+        call_id: r.call_id || r.id || `conv_real_${index + 1}`,
+        estatus_asistencia: statusVal,
+        correo_confirmado: r.correo || r.correo_confirmado || r.email || 'N/A',
+        nombre_representante: r.representante || r.nombre_representante || r.representative || 'N/A',
+        motivo_rechazo: r.motivo_rechazo || 'N/A',
+        resumen: r.resumen || r.summary || `[Llamada Real Saliente] Confirmación de ${r.contacto || 'Contacto'}. Estatus: ${statusVal}. Correo: ${r.correo || ''}.`,
+        name: r.contacto || r.name || 'Contacto Real',
+        phone: r.telefono || r.phone || 'Twilio MX'
       };
     });
 
@@ -257,10 +260,11 @@ function renderDashboard(records) {
 
 function calculateAndRenderKPIs(records) {
   const totalCalls = records.length > 0 ? records.length : 1845;
-  const confirmados = records.filter(r => r.estatus_asistencia === 'Confirmado').length;
-  const transferidos = records.filter(r => r.estatus_asistencia === 'Transfiere_Lugar').length;
-  const rechazados = records.filter(r => r.estatus_asistencia === 'Rechazado').length;
-  const indecisos = records.filter(r => r.estatus_asistencia === 'Indeciso').length;
+  const getStatus = r => r.estatus_asistencia || r.status || '';
+  const confirmados = records.filter(r => getStatus(r) === 'Confirmado').length;
+  const transferidos = records.filter(r => getStatus(r) === 'Transfiere_Lugar').length;
+  const rechazados = records.filter(r => getStatus(r) === 'Rechazado').length;
+  const indecisos = records.filter(r => getStatus(r) === 'Indeciso').length;
 
   const totalEfectivos = confirmados + transferidos;
   const contactationRate = totalCalls > 0 ? ((totalEfectivos / totalCalls) * 100).toFixed(1) : "18.4";
@@ -277,10 +281,11 @@ function setElText(id, val) {
 }
 
 function renderCharts(records) {
-  const confirmados = records.filter(r => r.estatus_asistencia === 'Confirmado').length || 18;
-  const transferidos = records.filter(r => r.estatus_asistencia === 'Transfiere_Lugar').length || 4;
-  const rechazados = records.filter(r => r.estatus_asistencia === 'Rechazado').length || 6;
-  const indecisos = records.filter(r => r.estatus_asistencia === 'Indeciso').length || 3;
+  const getStatus = r => r.estatus_asistencia || r.status || '';
+  const confirmados = records.filter(r => getStatus(r) === 'Confirmado').length || 18;
+  const transferidos = records.filter(r => getStatus(r) === 'Transfiere_Lugar').length || 4;
+  const rechazados = records.filter(r => getStatus(r) === 'Rechazado').length || 6;
+  const indecisos = records.filter(r => getStatus(r) === 'Indeciso').length || 3;
 
   const ctxStatus = document.getElementById('statusChart')?.getContext('2d');
   if (ctxStatus) {
@@ -345,13 +350,19 @@ function filterAndRenderTable(searchQuery = '') {
   const query = searchQuery.toLowerCase().trim();
 
   let filtered = currentRecords.filter(r => {
-    const matchesSearch = !query || 
-      (r.call_id && r.call_id.toLowerCase().includes(query)) ||
-      (r.correo_confirmado && r.correo_confirmado.toLowerCase().includes(query)) ||
-      (r.nombre_representante && r.nombre_representante.toLowerCase().includes(query)) ||
-      (r.resumen && r.resumen.toLowerCase().includes(query));
+    const callId = (r.call_id || r.id || '').toString();
+    const correo = (r.correo_confirmado || r.email || r.correo || '').toString();
+    const rep = (r.nombre_representante || r.representative || r.representante || '').toString();
+    const resumen = (r.resumen || r.summary || '').toString();
+    const status = (r.estatus_asistencia || r.status || 'Indeciso').toString();
 
-    const matchesFilter = activeFilter === 'ALL' || r.estatus_asistencia === activeFilter;
+    const matchesSearch = !query || 
+      callId.toLowerCase().includes(query) ||
+      correo.toLowerCase().includes(query) ||
+      rep.toLowerCase().includes(query) ||
+      resumen.toLowerCase().includes(query);
+
+    const matchesFilter = activeFilter === 'ALL' || status === activeFilter;
 
     return matchesSearch && matchesFilter;
   });
@@ -362,23 +373,30 @@ function filterAndRenderTable(searchQuery = '') {
   }
 
   tbody.innerHTML = filtered.map(r => {
-    const badgeClass = getBadgeClass(r.estatus_asistencia);
-    const labelStatus = r.estatus_asistencia.replace('_', ' ');
+    const callId = r.call_id || r.id || 'N/A';
+    const status = r.estatus_asistencia || r.status || 'Indeciso';
+    const badgeClass = getBadgeClass(status);
+    const labelStatus = String(status).replace('_', ' ');
+    const correo = r.correo_confirmado || r.email || r.correo || 'N/A';
+    const rep = r.nombre_representante || r.representative || r.representante || 'N/A';
+    const resumen = r.resumen || r.summary || 'N/A';
+    const fecha = r.fecha || r.time || 'N/A';
 
     return `
-      <tr onclick="openDetailModal('${r.call_id}')" style="cursor: pointer;">
-        <td><span class="call-id-text">${r.call_id}</span></td>
+      <tr onclick="openDetailModal('${callId}')" style="cursor: pointer;">
+        <td><span class="call-id-text">${callId}</span></td>
         <td><span class="status-badge ${badgeClass}">${labelStatus}</span></td>
-        <td style="font-weight: 500;">${r.correo_confirmado || 'N/A'}</td>
-        <td>${r.nombre_representante || 'N/A'}</td>
-        <td style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${r.resumen}</td>
-        <td style="color: #9CA3AF; font-size: 0.8rem;">${formatDate(r.fecha)}</td>
+        <td style="font-weight: 500;">${correo}</td>
+        <td>${rep}</td>
+        <td style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${resumen}</td>
+        <td style="color: #9CA3AF; font-size: 0.8rem;">${formatDate(fecha)}</td>
       </tr>
     `;
   }).join('');
 }
 
 function getBadgeClass(status) {
+  if (!status) return 'badge-indeciso';
   switch (status) {
     case 'Confirmado': return 'badge-confirmado';
     case 'Rechazado': return 'badge-rechazado';
@@ -400,35 +418,42 @@ function formatDate(dateStr) {
 }
 
 function openDetailModal(callId) {
-  const item = currentRecords.find(r => r.call_id === callId);
+  const item = currentRecords.find(r => (r.call_id || r.id) === callId);
   if (!item) return;
+
+  const idVal = item.call_id || item.id || 'N/A';
+  const statusVal = item.estatus_asistencia || item.status || 'Indeciso';
+  const correoVal = item.correo_confirmado || item.email || item.correo || 'N/A';
+  const repVal = item.nombre_representante || item.representative || item.representante || 'N/A';
+  const motivoVal = item.motivo_rechazo || 'N/A';
+  const resumenVal = item.resumen || item.summary || 'N/A';
 
   const modalBody = document.getElementById('modalDetailBody');
   if (modalBody) {
     modalBody.innerHTML = `
       <div class="detail-row">
         <span class="detail-label">Call ID:</span>
-        <span class="detail-value call-id-text">${item.call_id}</span>
+        <span class="detail-value call-id-text">${idVal}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Estatus de Asistencia:</span>
-        <span class="status-badge ${getBadgeClass(item.estatus_asistencia)}">${item.estatus_asistencia.replace('_', ' ')}</span>
+        <span class="status-badge ${getBadgeClass(statusVal)}">${String(statusVal).replace('_', ' ')}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Correo Registrado:</span>
-        <span class="detail-value">${item.correo_confirmado || 'N/A'}</span>
+        <span class="detail-value">${correoVal}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Representante / Delegado:</span>
-        <span class="detail-value">${item.nombre_representante || 'N/A'}</span>
+        <span class="detail-value">${repVal}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Motivo de Rechazo:</span>
-        <span class="detail-value">${item.motivo_rechazo || 'N/A'}</span>
+        <span class="detail-value">${motivoVal}</span>
       </div>
       <div style="margin-top: 1rem;">
         <span class="detail-label" style="display: block; margin-bottom: 0.5rem;">Resumen de la Conversación IA:</span>
-        <div class="transcript-box">${item.resumen}</div>
+        <div class="transcript-box">${resumenVal}</div>
       </div>
     `;
   }
