@@ -102,15 +102,13 @@ const DEMO_RECORDS = [
 // Verified Live Call Records from Google Sheets
 const REAL_SHEETS_RECORDS = [
   {
-    fecha: "2026-07-27 19:09:00",
-    call_id: "conv_real_1",
+    fecha: "2026-07-28 12:22:29",
+    call_id: "conv_2201kymzdhg2f29tr0fe56s4c7s8",
     estatus_asistencia: "Confirmado",
-    correo_confirmado: "luis@empresa.com",
-    nombre_representante: "Ninguno (Asiste Solo)",
+    correo_confirmado: "alejandro@telat.com",
+    nombre_representante: "N/A",
     motivo_rechazo: "N/A",
-    resumen: "[Llamada Real Saliente] Confirmación directa de Luis Cortina. Asistencia individual confirmada a la Convención Binacional AMSOC 2026.",
-    name: "Luis Cortina",
-    phone: "+52 55 5248 3354"
+    resumen: "El ejecutivo confirmó su asistencia a la Convención Binacional AMSOC 2026. Registró su correo corporativo (alejandro@telat.com) para recibir su pase de acceso digital con código QR."
   }
 ];
 
@@ -209,18 +207,16 @@ window.handleGoogleSheetsData = function(data) {
   
   if (data && data.status === 'success' && Array.isArray(rows) && rows.length > 0) {
     const realRecords = rows.map((r, index) => {
-      const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.replace('T', ' ').slice(0, 19) : String(r.fecha)) : '2026-07-27 19:09:00';
-      const statusVal = r.estatus || r.estatus_asistencia || r.status || 'Confirmado';
+      const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.replace('T', ' ').slice(0, 19) : String(r.fecha)) : '2026-07-28 12:22:29';
+      const statusVal = r.estatus_asistencia || r.estatus || r.status || 'Confirmado';
       return {
         fecha: timeStr,
         call_id: r.call_id || r.id || `conv_real_${index + 1}`,
         estatus_asistencia: statusVal,
-        correo_confirmado: r.correo || r.correo_confirmado || r.email || 'N/A',
-        nombre_representante: r.representante || r.nombre_representante || r.representative || 'N/A',
-        motivo_rechazo: r.motivo_rechazo || 'N/A',
-        resumen: r.resumen || r.summary || `[Llamada Real Saliente] Confirmación de ${r.contacto || 'Contacto'}. Estatus: ${statusVal}. Correo: ${r.correo || ''}.`,
-        name: r.contacto || r.name || 'Contacto Real',
-        phone: r.telefono || r.phone || 'Twilio MX'
+        correo_confirmado: r.correo_confirmado || r.correo || r.email || 'N/A',
+        nombre_representante: r.nombre_representante || r.representante || r.representative || 'N/A',
+        motivo_rechazo: r.motivo_rechazo || r.motivo || 'N/A',
+        resumen: r.resumen || r.summary || `El ejecutivo confirmó su asistencia a la Convención Binacional AMSOC 2026.`
       };
     });
 

@@ -1,7 +1,7 @@
 const API_KEY = "sk_25b25a8b26b88709860d8694982e9c75236a123c5afe4f0f";
 const AGENT_ID = "agent_1101kyjnvcjwedr9k5vga3xz25yp";
 const BASE_URL = "https://api.elevenlabs.io/v1/convai";
-const DEFAULT_WEBHOOK = "https://script.google.com/macros/s/AKfycbx5WpdEAnrgkf99rFaLfdRPZDkRUGrUxBCl5BzWA5aFjgm0n24pHuV6ryJXBXLiPH9A/exec";
+const DEFAULT_WEBHOOK = "https://script.google.com/macros/s/AKfycbymTuQKWWZyknRTJIcdZgmmTPOstnAW4ZONm8X1bnAZYnQF7rgtK_espuDKzOJTWFV5/exec";
 
 const SYSTEM_PROMPT = `# ROL Y PERSONALIDAD
 Eres un representante ejecutivo de la American Society of Mexico (AMSOC). Tu tono es profesional, cálido, ágil y muy directo. Hablas un español neutro y fluido.
