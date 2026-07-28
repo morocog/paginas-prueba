@@ -171,48 +171,53 @@ function setupEventListeners() {
   }
 }
 
-async function fetchLiveData() {
+function fetchLiveData() {
   const statusEl = document.getElementById('liveSyncText');
   if (statusEl) statusEl.textContent = 'Sincronizando...';
 
-  // Forzar siempre la URL de la API activa y limpia
-  const activeApiUrl = 'https://script.google.com/macros/s/AKfycbwXU8hk8JUN4N0sDY61X5lWh-RRGHpcI5jedFQ3Sy00Aiv0BfH8FqI8Y-VJei22chWA/exec?action=data';
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwlIH1jkJcPgE1swfCdGnZVEM8gsogBcKYA7DK4GH1oC5rxk94F2fJSARuGFOkdslf4/exec?callback=handleGoogleSheetsData';
+  
+  const existingScript = document.getElementById('jsonp_gas_script');
+  if (existingScript) existingScript.remove();
 
-  try {
-    const res = await fetch(activeApiUrl, { redirect: 'follow' });
-    const data = await res.json();
-    const rows = data.data || data.records || [];
-    
-    if (data.status === 'success' && Array.isArray(rows) && rows.length > 0) {
-      const realRecords = rows.map((r, index) => {
-        const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.split('T')[1].slice(0, 5) : String(r.fecha).slice(11, 16)) : 'En vivo';
-        return {
-          id: `conv_real_${index + 1}`,
-          status: r.estatus || 'Confirmado',
-          email: r.correo || 'N/A',
-          representative: r.representante || 'N/A',
-          summary: r.resumen || `[Llamada Real Saliente] Confirmación de ${r.contacto}. Estatus: ${r.estatus}. Correo: ${r.correo}.`,
-          time: timeStr || 'En vivo',
-          name: r.contacto || 'Contacto Real',
-          phone: r.telefono || 'Twilio MX'
-        };
-      });
+  const script = document.createElement('script');
+  script.id = 'jsonp_gas_script';
+  script.src = scriptUrl;
+  script.onerror = function() {
+    console.warn('JSONP fetch failed, falling back to cached demo view.');
+    renderDashboard(currentRecords);
+    if (statusEl) statusEl.textContent = 'En Vivo (Sincronizado)';
+  };
+  document.body.appendChild(script);
+}
 
-      // Combinar llamadas reales arriba de los registros demo para conservar la vista ejecutiva intacta
-      currentRecords = [...realRecords.reverse(), ...DEMO_RECORDS];
-      renderDashboard(currentRecords);
-      if (statusEl) statusEl.textContent = `En Vivo (${realRecords.length} llamadas reales + Demo)`;
-    } else {
-      console.warn('API returned empty records, showing demo view.');
-      renderDashboard(currentRecords);
-      if (statusEl) statusEl.textContent = 'En Vivo (Sincronizado)';
-    }
-  } catch (err) {
-    console.error('Error fetching Google Sheets Live Data:', err);
+window.handleGoogleSheetsData = function(data) {
+  const statusEl = document.getElementById('liveSyncText');
+  const rows = (data && (data.data || data.records)) || [];
+  
+  if (data && data.status === 'success' && Array.isArray(rows) && rows.length > 0) {
+    const realRecords = rows.map((r, index) => {
+      const timeStr = r.fecha ? (typeof r.fecha === 'string' && r.fecha.includes('T') ? r.fecha.split('T')[1].slice(0, 5) : String(r.fecha).slice(11, 16)) : 'En vivo';
+      return {
+        id: `conv_real_${index + 1}`,
+        status: r.estatus || 'Confirmado',
+        email: r.correo || 'N/A',
+        representative: r.representante || 'N/A',
+        summary: r.resumen || `[Llamada Real Saliente] Confirmación de ${r.contacto}. Estatus: ${r.estatus}. Correo: ${r.correo}.`,
+        time: timeStr || 'En vivo',
+        name: r.contacto || 'Contacto Real',
+        phone: r.telefono || 'Twilio MX'
+      };
+    });
+
+    currentRecords = [...realRecords.reverse(), ...DEMO_RECORDS];
+    renderDashboard(currentRecords);
+    if (statusEl) statusEl.textContent = `En Vivo (${realRecords.length} llamadas reales + Demo)`;
+  } else {
     renderDashboard(currentRecords);
     if (statusEl) statusEl.textContent = 'En Vivo (Sincronizado)';
   }
-}
+};
 
 function promptWebhookUrl() {
   const current = localStorage.getItem('AMSOC_GAS_URL') || gasApiUrl;
