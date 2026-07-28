@@ -106,7 +106,7 @@ let statusChartInstance = null;
 let rejectionChartInstance = null;
 
 // URL por defecto del Web App desplegado en Apps Script para AMSOC
-const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbyDOIzZTIswp6Fb2xrFn5MHVedh_MqJsbs7LFA762C8g7IvXl1SRAkAs34vwScDNTH-/exec?action=data';
+const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbyTFYHGRh0JAU3Fkv_zAUxD5oE8-kUgLm9imiEFhUJSNG-gQhfVGZe0PhtHBoUlci9h/exec?action=data';
 let gasApiUrl = localStorage.getItem('AMSOC_GAS_URL') || DEFAULT_GAS_URL;
 
 // DOM Elements
