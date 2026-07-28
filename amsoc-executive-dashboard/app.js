@@ -175,7 +175,10 @@ function fetchLiveData() {
   const statusEl = document.getElementById('liveSyncText');
   if (statusEl) statusEl.textContent = 'Sincronizando...';
 
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwlIH1jkJcPgE1swfCdGnZVEM8gsogBcKYA7DK4GH1oC5rxk94F2fJSARuGFOkdslf4/exec?callback=handleGoogleSheetsData';
+  // Limpiar cualquier URL obsoleta guardada localmente
+  localStorage.removeItem('AMSOC_GAS_URL');
+
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbymTuQKWWZyknRTJIcdZgmmTPOstnAW4ZONm8X1bnAZYnQF7rgtK_espuDKzOJTWFV5/exec?callback=handleGoogleSheetsData';
   
   const existingScript = document.getElementById('jsonp_gas_script');
   if (existingScript) existingScript.remove();
